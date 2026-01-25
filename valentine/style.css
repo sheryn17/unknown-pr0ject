@@ -94,13 +94,34 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
 }
 
 .final-message { 
-    position: fixed; z-index: 400; text-align: center; color: white; width: 100%; top: 45%; 
+    position: fixed; 
+    z-index: 400; 
+    width: 100%; 
+    top: 50%; /* Changed from 45% to 50% */
+    left: 0;   /* This ensures it starts from the edge */
+    transform: translateY(-50%); /* Perfectly centers vertically */
+    text-align: center; 
+    color: white; 
     text-shadow: 0 0 15px var(--heart-pink);
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-#image-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 10000;
+.final-message h2 {
+    font-size: 2.5rem; /* Makes the title bigger */
+    margin: 0;
 }
-#zoomed-img { max-width: 85%; max-height: 80%; border: 2px solid var(--heart-pink); border-radius: 10px; }
+
+.final-message p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Fix for mobile screens */
+@media (max-width: 600px) {
+    .final-message h2 { font-size: 1.5rem; }
+    .final-message p { font-size: 1rem; }
+}
