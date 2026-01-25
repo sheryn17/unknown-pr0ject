@@ -1,6 +1,6 @@
 const output = document.getElementById('output');
 const terminalText = [
-    "Hi my baby...",
+    "Hi love",
     "Initializing secure connection...",
     "Accessing internal_feelings.sys...",
     "Found 1 critical request...",
@@ -61,28 +61,74 @@ function drawHeart() {
 }
 
 const celebrate = () => {
-    document.body.innerHTML = `
-        <div style="text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; width:100vw; background:#0d0208; color:white; font-family:'Courier New';">
-            <h1 style="color:#ff2d75; font-size:3rem;">SUCCESS! ❤️</h1>
-            <p style="font-size:1.5rem;">I love you so much, baby!</p>
-            <div style="font-size:5rem; margin-top:20px;">🥰</div>
-        </div>
-    `;
+    // 1. Hide the terminal and show the gallery
+    document.getElementById('terminal-container').style.display = 'none';
+    document.getElementById('photo-gallery').classList.remove('hidden');
+    document.body.style.background = "#000";
 
-    // Heart Rain
-    setInterval(() => {
-        const heart = document.createElement("div");
-        heart.classList.add("heart-particle");
-        heart.innerHTML = ["❤️", "💖", "💝", "💕"][Math.floor(Math.random() * 4)];
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.fontSize = Math.random() * 20 + 15 + "px";
-        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-    }, 150);
+    const canvas = document.getElementById('binaryCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+    const binary = ["0", "1", "❤"];
+
+    class Particle {
+        constructor() {
+            this.x = canvas.width / 2;
+            this.y = canvas.height / 2;
+            // Explosion velocity
+            this.vx = (Math.random() - 0.5) * 15;
+            this.vy = (Math.random() - 0.5) * 15;
+            this.text = binary[Math.floor(Math.random() * binary.length)];
+            this.alpha = 1;
+            this.fontSize = Math.random() * 20 + 10;
+        }
+
+        draw() {
+            ctx.globalAlpha = this.alpha;
+            ctx.fillStyle = "#ff2d75";
+            ctx.font = `${this.fontSize}px monospace`;
+            ctx.fillText(this.text, this.x, this.y);
+            this.x += this.vx;
+            this.y += this.vy;
+            this.alpha -= 0.01; // Fade out
+        }
+    }
+
+    // Create burst
+    for(let i=0; i<150; i++) {
+        particles.push(new Particle());
+    }
+
+    function animateBinary() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p, index) => {
+            if (p.alpha <= 0) {
+                particles.splice(index, 1);
+            } else {
+                p.draw();
+            }
+        });
+        if (particles.length > 0) {
+            requestAnimationFrame(animateBinary);
+        } else {
+            // After explosion, show the final message
+            showFinalMessage();
+        }
+    }
+
+    animateBinary();
 };
 
-document.getElementById('yes-btn').addEventListener('click', celebrate);
-document.getElementById('yes-btn-2').addEventListener('click', celebrate);
-
-window.onload = startSequence;
+function showFinalMessage() {
+    const msg = document.createElement('div');
+    msg.innerHTML = `
+        <div style="position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; z-index:10005;">
+            <h1 style="color:#ff2d75; font-size:3rem; text-shadow:0 0 20px #ff2d75;">I LOVE YOU</h1>
+            <p style="color:white; font-family:monospace;">System Status: Occupied by You Forever.</p>
+        </div>
+    `;
+    document.body.appendChild(msg);
+}

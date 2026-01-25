@@ -70,3 +70,36 @@ button:hover { background: var(--heart-pink); color: white; }
 }
 
 @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+#binaryCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+.floating-photo {
+    position: fixed;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid var(--heart-pink);
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--heart-pink);
+    z-index: 10001;
+    left: var(--x);
+    top: var(--y);
+    opacity: 0;
+    animation: floatAround 8s ease-in-out infinite alternate, fadeInPhoto 2s forwards;
+    animation-delay: var(--d);
+}
+
+@keyframes floatAround {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(20px, -30px) rotate(10deg); }
+}
+
+@keyframes fadeInPhoto {
+    to { opacity: 0.8; }
+}
