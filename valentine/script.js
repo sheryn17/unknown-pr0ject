@@ -65,13 +65,14 @@ function drawHeart() {
 function celebrate() {
     document.getElementById('terminal-container').style.display = 'none';
     document.getElementById('heartCanvas').style.display = 'none';
-    document.getElementById('photo-gallery').classList.remove('hidden');
+    const gallery = document.getElementById('photo-gallery');
+    gallery.classList.remove('hidden');
     
     const canvas = document.getElementById('binaryCanvas');
+    canvas.style.zIndex = "1"; // Keep explosion behind photos
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
+    // ... (rest of your existing celebrate code)
+}
     let particles = [];
     for(let i=0; i<150; i++) {
         particles.push({
