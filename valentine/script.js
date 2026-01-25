@@ -8,7 +8,7 @@ const terminalText = [
 
 let line = 0;
 
-// STAGE 1: Typewriter
+// Typewriter Effect
 async function startSequence() {
     for (let text of terminalText) {
         let p = document.createElement('p');
@@ -24,7 +24,7 @@ async function startSequence() {
     document.getElementById('continue-step').classList.remove('hidden');
 }
 
-// STAGE 2: Continue
+// Access Granted Trigger
 document.getElementById('continue-btn').addEventListener('click', async () => {
     document.getElementById('continue-step').classList.add('hidden');
     let p = document.createElement('p');
@@ -35,7 +35,7 @@ document.getElementById('continue-btn').addEventListener('click', async () => {
     drawHeart();
 });
 
-// STAGE 3: Drawing Heart
+// Drawing the Neon Heart
 function drawHeart() {
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
@@ -61,7 +61,7 @@ function drawHeart() {
     animate();
 }
 
-// STAGE 4: Celebration (The Digital Constellation)
+// UNIQUE CELEBRATION: Digital Constellation
 function celebrate() {
     document.getElementById('terminal-container').style.display = 'none';
     document.getElementById('heartCanvas').style.display = 'none';
@@ -74,14 +74,12 @@ function celebrate() {
     const ctx = canvas.getContext('2d');
     
     let particles = [];
-    // Create floating "data nodes"
     for(let i=0; i<80; i++) {
         particles.push({
             x: Math.random() * canvas.width,
             y: Math.random() * canvas.height,
             vx: (Math.random() - 0.5) * 0.5,
             vy: (Math.random() - 0.5) * 0.5,
-            size: Math.random() * 15 + 5,
             char: ["1", "0", "❤", "{ }"][Math.floor(Math.random() * 4)]
         });
     }
@@ -92,28 +90,24 @@ function celebrate() {
         ctx.font = "14px monospace";
         
         particles.forEach((p, i) => {
-            // Update position
             p.x += p.vx;
             p.y += p.vy;
 
-            // Screen wrap-around
             if (p.x < 0) p.x = canvas.width;
             if (p.x > canvas.width) p.x = 0;
             if (p.y < 0) p.y = canvas.height;
             if (p.y > canvas.height) p.y = 0;
 
-            // Draw character
             ctx.globalAlpha = 0.4;
             ctx.fillText(p.char, p.x, p.y);
 
-            // Draw connecting lines to nearby particles
             for (let j = i + 1; j < particles.length; j++) {
                 let p2 = particles[j];
                 let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
                 if (dist < 150) {
                     ctx.beginPath();
                     ctx.strokeStyle = "#ff2d75";
-                    ctx.globalAlpha = 1 - (dist / 150); // Fade lines based on distance
+                    ctx.globalAlpha = (1 - (dist / 150)) * 0.5;
                     ctx.lineWidth = 0.5;
                     ctx.moveTo(p.x, p.y);
                     ctx.lineTo(p2.x, p2.y);
@@ -125,3 +119,13 @@ function celebrate() {
     }
     drawConstellation();
 }
+
+// Photo Zoom
+function zoomImage(img) {
+    const overlay = document.getElementById('image-overlay');
+    document.getElementById('zoomed-img').src = img.src;
+    overlay.style.display = 'flex';
+}
+function closeZoom() { document.getElementById('image-overlay').style.display = 'none'; }
+
+window.onload = startSequence;
