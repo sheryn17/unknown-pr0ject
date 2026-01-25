@@ -1,0 +1,77 @@
+:root {
+    --bg-dark: #0d0208;
+    --neon-green: #00ff41;
+    --heart-pink: #ff2d75;
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--neon-green);
+    font-family: 'Courier New', Courier, monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    overflow: hidden;
+}
+
+#heartCanvas {
+    position: absolute;
+    z-index: 1;
+    filter: blur(1px);
+}
+
+#terminal-container {
+    width: 90%;
+    max-width: 650px;
+    background: var(--glass);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 65, 0.3);
+    border-radius: 8px;
+    z-index: 10;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+}
+
+.terminal-header {
+    background: #333;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px 8px 0 0;
+}
+
+.dot { height: 12px; width: 12px; border-radius: 50%; margin-right: 6px; }
+.red { background: #ff5f56; }
+.yellow { background: #ffbd2e; }
+.green { background: #27c93f; }
+.title { font-size: 12px; color: #bbb; margin-left: 10px; }
+
+.terminal-body { padding: 20px; line-height: 1.6; }
+
+#output { margin-bottom: 10px; color: #fff; }
+
+.hidden { display: none !important; }
+
+button {
+    background: transparent;
+    border: 1px solid var(--heart-pink);
+    color: var(--heart-pink);
+    padding: 10px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: var(--heart-pink);
+    color: white;
+    box-shadow: 0 0 20px var(--heart-pink);
+}
+
+#no-btn { position: absolute; transition: 0.1s ease; }
+
+.cursor { animation: blink 1s infinite; }
+@keyframes blink { 50% { opacity: 0; } }
