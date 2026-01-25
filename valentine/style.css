@@ -38,24 +38,17 @@ canvas { position: fixed; top: 0; left: 0; pointer-events: none; }
 .terminal-header { background: #222; padding: 10px; display: flex; border-radius: 10px 10px 0 0; }
 .dot { height: 12px; width: 12px; border-radius: 50%; margin-right: 6px; }
 .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
-.terminal-body { padding: 25px; line-height: 1.5; }
+.terminal-body { padding: 25px; line-height: 1.5; color: var(--neon-green); }
 
 .hidden { display: none !important; }
-
 .system-msg { color: #fff; font-weight: bold; margin-bottom: 10px; text-align: center; }
 
 #proposal-question { 
-    color: white; 
-    font-size: 1.3rem; 
-    text-align: center; 
-    margin: 20px 0;
+    color: white; font-size: 1.3rem; text-align: center; margin: 20px 0; 
     animation: flicker 2s infinite;
 }
 
-@keyframes flicker {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-}
+@keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
 .btn-group { display: flex; flex-direction: column; gap: 12px; align-items: center; }
 
@@ -76,6 +69,7 @@ button {
 #continue-btn:hover { background: var(--neon-green); color: black; }
 button:hover { background: var(--heart-pink); color: white; transform: scale(1.05); }
 
+/* Floating Gallery */
 .floating-photo {
     position: fixed;
     width: 110px; height: 110px;
@@ -85,6 +79,7 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     z-index: 500;
     left: var(--x); top: var(--y);
     animation: floatAnim 6s ease-in-out infinite alternate;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 @keyframes floatAnim {
@@ -93,22 +88,11 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
 }
 
 .final-message { 
-    position: fixed; 
-    z-index: 400; 
-    text-align: center; 
-    color: white; 
-    width: 100%; 
-    top: 45%; 
-    pointer-events: none;
+    position: fixed; z-index: 400; text-align: center; color: white; width: 100%; top: 45%; 
 }
 
 #image-overlay {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.95);
-    display: none;
-    justify-content: center;
-    align-items: center;
-    z-index: 10000;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.95); display: none; justify-content: center; align-items: center; z-index: 10000;
 }
-#zoomed-img { max-width: 85%; max-height: 80%; border-radius: 10px; border: 2px solid var(--heart-pink); }
+#zoomed-img { max-width: 85%; max-height: 80%; border: 2px solid var(--heart-pink); border-radius: 10px; }
