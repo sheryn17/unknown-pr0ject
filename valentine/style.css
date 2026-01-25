@@ -1,105 +1,93 @@
 :root {
-    --bg-dark: #0d0208;
+    --bg-dark: #0a0106;
     --neon-green: #00ff41;
     --heart-pink: #ff2d75;
 }
 
 body {
     background-color: var(--bg-dark);
-    color: var(--neon-green);
-    font-family: 'Courier New', Courier, monospace;
-    height: 100vh;
+    margin: 0;
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    overflow: hidden;
+    height: 100vh;
+    font-family: 'Courier New', monospace;
+    animation: heartbeat-bg 2s infinite;
 }
 
-#heartCanvas { position: absolute; z-index: 1; }
+@keyframes heartbeat-bg {
+    0%, 100% { background-color: #0a0106; }
+    50% { background-color: #1a020c; }
+}
 
+/* Canvas Layers */
+canvas { position: fixed; top: 0; left: 0; pointer-events: none; }
+#heartCanvas { z-index: 1; }
+#binaryCanvas { z-index: 9999; }
+
+/* Terminal */
 #terminal-container {
     width: 90%;
-    max-width: 500px;
-    background: rgba(13, 2, 8, 0.9);
-    border: 1px solid rgba(0, 255, 65, 0.3);
-    border-radius: 8px;
+    max-width: 450px;
+    background: rgba(10, 1, 6, 0.9);
+    border: 1px solid var(--heart-pink);
+    border-radius: 12px;
     z-index: 10;
-    box-shadow: 0 0 30px rgba(0,0,0,1);
+    box-shadow: 0 0 30px rgba(255, 45, 117, 0.3);
 }
 
-.terminal-header { background: #333; padding: 8px; border-radius: 8px 8px 0 0; display: flex; align-items: center; }
+.terminal-header { background: #333; padding: 8px; border-radius: 12px 12px 0 0; display: flex; }
 .dot { height: 10px; width: 10px; border-radius: 50%; margin-right: 5px; }
 .red { background: #ff5f56; } .yellow { background: #ffbd2e; } .green { background: #27c93f; }
+.terminal-body { padding: 20px; color: var(--neon-green); }
 
-.terminal-body { padding: 20px; text-align: left; }
-#output { margin-bottom: 20px; white-space: pre-wrap; }
-
-#proposal-question {
-    color: var(--heart-pink);
-    font-size: 1.4rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
+/* Buttons */
+.hidden { display: none !important; }
 .btn-group { display: flex; flex-direction: column; gap: 10px; align-items: center; }
-
 button {
     background: transparent;
-    border: 1px solid var(--heart-pink);
+    border: 2px solid var(--heart-pink);
     color: var(--heart-pink);
     padding: 15px;
-    width: 100%;
-    border-radius: 25px;
+    width: 80%;
+    border-radius: 30px;
+    font-size: 1.1rem;
     cursor: pointer;
-    font-family: inherit;
     transition: 0.3s;
 }
-
 button:hover { background: var(--heart-pink); color: white; }
 
-.hidden { display: none; }
-
-.heart-particle {
-    position: fixed;
-    top: -10px;
-    pointer-events: none;
-    z-index: 9999;
-    animation: fall linear forwards;
-}
-
-@keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
-
-#binaryCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    z-index: 9998;
-}
-
+/* Photos */
 .floating-photo {
     position: fixed;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     border: 2px solid var(--heart-pink);
     border-radius: 10px;
-    box-shadow: 0 0 15px var(--heart-pink);
-    z-index: 10001;
+    z-index: 100;
     left: var(--x);
     top: var(--y);
-    opacity: 0;
-    animation: floatAround 8s ease-in-out infinite alternate, fadeInPhoto 2s forwards;
+    cursor: zoom-in;
+    animation: float 6s ease-in-out infinite alternate;
     animation-delay: var(--d);
 }
 
-@keyframes floatAround {
-    from { transform: translate(0, 0) rotate(0deg); }
-    to { transform: translate(20px, -30px) rotate(10deg); }
+@keyframes float {
+    from { transform: translate(0,0) rotate(0deg); }
+    to { transform: translate(15px, -20px) rotate(5deg); }
 }
 
-@keyframes fadeInPhoto {
-    to { opacity: 0.8; }
+/* Zoom Overlay */
+#image-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 20000;
 }
+
+#zoomed-img { max-width: 90%; max-height: 80%; border: 3px solid white; }

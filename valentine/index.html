@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For My Baby ❤️</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <canvas id="heartCanvas"></canvas>
+    <canvas id="binaryCanvas"></canvas>
+
+    <div id="bg-stream" class="bg-stream"></div>
 
     <div id="terminal-container">
         <div class="terminal-header">
@@ -19,8 +22,8 @@
             <div id="action-buttons" class="hidden">
                 <p id="proposal-question">Will you be my valentine, baby?</p>
                 <div class="btn-group">
-                    <button id="yes-btn">Yes! </button>
-                    <button id="yes-btn-2">or still Yes hehe </button>
+                    <button id="yes-btn">Yes! ❤️</button>
+                    <button id="yes-btn-2">Yes! 🥰</button>
                 </div>
             </div>
         </div>
@@ -31,8 +34,11 @@
     <img src="https://i.ibb.co/Xk7qQBSr/Image-5.jpg" class="floating-photo" style="--d: 2s; --x: 70%; --y: 30%;">
     <img src="https://i.ibb.co/PGrfvCW6/Image-6.jpg" class="floating-photo" style="--d: 4s; --x: 30%; --y: 70%;">
     <img src="https://i.ibb.co/9kByfN24/Image-7.jpg" class="floating-photo" style="--d: 6s; --x: 60%; --y: 75%;">
-</div>
-<canvas id="binaryCanvas"></canvas>
+    </div>
+
+    <div id="image-overlay" onclick="closeZoom()">
+        <img id="zoomed-img" src="">
+    </div>
 
     <script src="script.js"></script>
 </body>
