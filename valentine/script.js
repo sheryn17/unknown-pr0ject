@@ -1,17 +1,16 @@
 const output = document.getElementById('output');
 const terminalText = [
-    "Hi love!.",
+    "Hi my baby...",
     "Initializing secure connection...",
-    "Decrypting feelings.dat...",
-    "Scanning for mutual compatibility...",
-    "MATCH FOUND: 100% Core Synchronicity.",
-    "Target Identity: My baby bear.",
-    "Loading Question Protocol..."
+    "Accessing internal_feelings.sys...",
+    "Found 1 critical request...",
+    "Loading visual representation..."
 ];
 
 let line = 0;
 
-async function typeLines() {
+async function startSequence() {
+    // 1. Type the terminal lines
     for (let text of terminalText) {
         let p = document.createElement('p');
         p.textContent = line === 0 ? text : "> " + text;
@@ -20,63 +19,70 @@ async function typeLines() {
         line++;
         await new Promise(r => setTimeout(r, 1000));
     }
-    document.getElementById('action-buttons').classList.remove('hidden');
-    drawHeart();
+
+    // 2. Draw the heart
+    await drawHeart();
+
+    // 3. Show the question and buttons AFTER heart is done
+    setTimeout(() => {
+        document.getElementById('action-buttons').classList.remove('hidden');
+    }, 500);
 }
 
 function drawHeart() {
-    const canvas = document.getElementById('heartCanvas');
-    const ctx = canvas.getContext('2d');
-    // Adjust canvas for high-density mobile screens
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    return new Promise((resolve) => {
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    let t = 0;
-    ctx.strokeStyle = "#ff2d75";
-    ctx.lineWidth = 2;
+        let t = 0;
+        ctx.strokeStyle = "#ff2d75";
+        ctx.lineWidth = 2;
 
-    function animate() {
-        let x = 16 * Math.pow(Math.sin(t), 3);
-        let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-        
-        // Scale down slightly for mobile (multiplier 10 instead of 15)
-        const scale = window.innerWidth < 600 ? 10 : 15;
-        ctx.lineTo(x * scale + canvas.width/2, y * scale + canvas.height/2);
-        ctx.stroke();
+        function animate() {
+            let x = 16 * Math.pow(Math.sin(t), 3);
+            let y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+            
+            const scale = window.innerWidth < 600 ? 10 : 15;
+            ctx.lineTo(x * scale + canvas.width/2, y * scale + canvas.height/2);
+            ctx.stroke();
 
-        t += 0.05;
-        if (t < 2 * Math.PI) requestAnimationFrame(animate);
-    }
-    ctx.beginPath();
-    animate();
+            t += 0.05;
+            if (t < 2 * Math.PI) {
+                requestAnimationFrame(animate);
+            } else {
+                resolve(); // Heart is finished
+            }
+        }
+        ctx.beginPath();
+        animate();
+    });
 }
 
-const noBtn = document.getElementById('no-btn');
-
-// This handles both Desktop (mouseover) and Mobile (touchstart)
-const moveButton = () => {
-    const x = Math.random() * (window.innerWidth - 150);
-    const y = Math.random() * (window.innerHeight - 50);
-    noBtn.style.position = 'fixed'; // Ensures it can move anywhere
-    noBtn.style.left = `${x}px`;
-    noBtn.style.top = `${y}px`;
-};
-
-noBtn.addEventListener('mouseover', moveButton);
-noBtn.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // Prevents the actual click
-    moveButton();
-});
-
-document.getElementById('yes-btn').addEventListener('click', () => {
+const celebrate = () => {
     document.body.innerHTML = `
-        <div style="text-align:center; padding: 40px; display: flex; flex-direction: column; justify-content: center; height: 100vh;">
-            <h1 style="color:#ff2d75; font-size:2.5rem; font-family: 'Courier New', monospace;">SYSTEM OVERLOAD! ❤️</h1>
-            <p style="color:#fff; font-size:1.2rem; font-family: 'Courier New', monospace;">Connection established permanently. I love you, baby!</p>
-            <div style="font-size: 4rem; margin-top: 20px;">🥰🌹</div>
+        <div style="text-align:center; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh; width:100vw; background:#0d0208; color:white; font-family:'Courier New';">
+            <h1 style="color:#ff2d75; font-size:3rem;">SUCCESS! ❤️</h1>
+            <p style="font-size:1.5rem;">I love you so much, baby!</p>
+            <div style="font-size:5rem; margin-top:20px;">🥰</div>
         </div>
     `;
-    document.body.style.backgroundColor = "#0d0208";
-});
 
-window.onload = typeLines;
+    // Heart Rain
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart-particle");
+        heart.innerHTML = ["❤️", "💖", "💝", "💕"][Math.floor(Math.random() * 4)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+    }, 150);
+};
+
+document.getElementById('yes-btn').addEventListener('click', celebrate);
+document.getElementById('yes-btn-2').addEventListener('click', celebrate);
+
+window.onload = startSequence;
