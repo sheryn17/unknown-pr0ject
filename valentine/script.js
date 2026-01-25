@@ -1,6 +1,6 @@
 const output = document.getElementById('output');
 const terminalText = [
-    "Hi my baby...",
+    "Hi love!.",
     "Initializing secure connection...",
     "Decrypting feelings.dat...",
     "Scanning for mutual compatibility...",
