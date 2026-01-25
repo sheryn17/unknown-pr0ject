@@ -3,14 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>For My Baby ❤️</title>
+    <title>Protocol: Valentine ❤️</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <canvas id="heartCanvas"></canvas>
     <canvas id="binaryCanvas"></canvas>
-
-    <div id="bg-stream" class="bg-stream"></div>
 
     <div id="terminal-container">
         <div class="terminal-header">
@@ -19,21 +17,31 @@
         </div>
         <div class="terminal-body">
             <div id="output"></div>
+            
+            <div id="continue-step" class="hidden">
+                <p class="system-msg">Would you like to continue? [Y/N]</p>
+                <button id="continue-btn">CONTINUE_PROMPT</button>
+            </div>
+
             <div id="action-buttons" class="hidden">
                 <p id="proposal-question">Will you be my valentine, baby?</p>
                 <div class="btn-group">
-                    <button id="yes-btn">Yes! ❤️</button>
-                    <button id="yes-btn-2">Yes! 🥰</button>
+                    <button class="yes-btn" onclick="celebrate()">Yes! ❤️</button>
+                    <button class="yes-btn" onclick="celebrate()">Yes! 🥰</button>
                 </div>
             </div>
         </div>
     </div>
 
-<div id="photo-gallery" class="hidden">
-    <img src="https://i.ibb.co/Vpx3QpZL/Image-4.jpg" class="floating-photo" style="--d: 0s; --x: 20%; --y: 20%;">
-    <img src="https://i.ibb.co/Xk7qQBSr/Image-5.jpg" class="floating-photo" style="--d: 2s; --x: 70%; --y: 30%;">
-    <img src="https://i.ibb.co/PGrfvCW6/Image-6.jpg" class="floating-photo" style="--d: 4s; --x: 30%; --y: 70%;">
-    <img src="https://i.ibb.co/9kByfN24/Image-7.jpg" class="floating-photo" style="--d: 6s; --x: 60%; --y: 75%;">
+    <div id="photo-gallery" class="hidden">
+        <img src="https://i.ibb.co/Vpx3QpZL/Image-4.jpg" class="floating-photo" style="--d: 0s; --x: 20%; --y: 20%;">
+        <img src="https://i.ibb.co/Xk7qQBSr/Image-5.jpg" class="floating-photo" style="--d: 2s; --x: 70%; --y: 30%;">
+        <img src="https://i.ibb.co/PGrfvCW6/Image-6.jpg" class="floating-photo" style="--d: 4s; --x: 30%; --y: 70%;">
+        <img src="https://i.ibb.co/9kByfN24/Image-7.jpg" class="floating-photo" style="--d: 6s; --x: 60%; --y: 75%;">
+        <div class="final-message">
+            <h2>CONNECTION STABLE ❤️</h2>
+            <p>I love you more than words can code.</p>
+        </div>
     </div>
 
     <div id="image-overlay" onclick="closeZoom()">
