@@ -61,7 +61,7 @@ function drawHeart() {
     animate();
 }
 
-// STAGE 4: Celebration
+// STAGE 4: Celebration (The Digital Constellation)
 function celebrate() {
     document.getElementById('terminal-container').style.display = 'none';
     document.getElementById('heartCanvas').style.display = 'none';
@@ -69,39 +69,59 @@ function celebrate() {
     gallery.classList.remove('hidden');
     
     const canvas = document.getElementById('binaryCanvas');
-    canvas.style.zIndex = "1"; // Keep explosion behind photos
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
     const ctx = canvas.getContext('2d');
-    // ... (rest of your existing celebrate code)
-}
+    
     let particles = [];
-    for(let i=0; i<150; i++) {
+    // Create floating "data nodes"
+    for(let i=0; i<80; i++) {
         particles.push({
-            x: canvas.width/2, y: canvas.height/2,
-            vx: (Math.random()-0.5)*25, vy: (Math.random()-0.5)*25,
-            alpha: 1, text: ["1","0","❤"][Math.floor(Math.random()*3)]
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            size: Math.random() * 15 + 5,
+            char: ["1", "0", "❤", "{ }"][Math.floor(Math.random() * 4)]
         });
     }
 
-    function anim() {
-        ctx.clearRect(0,0,canvas.width, canvas.height);
+    function drawConstellation() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ff2d75";
+        ctx.font = "14px monospace";
+        
         particles.forEach((p, i) => {
-            ctx.globalAlpha = p.alpha;
-            ctx.fillStyle = "#ff2d75";
-            ctx.font = "20px monospace";
-            ctx.fillText(p.text, p.x, p.y);
-            p.x += p.vx; p.y += p.vy; p.alpha -= 0.01;
-            if(p.alpha <= 0) particles.splice(i, 1);
+            // Update position
+            p.x += p.vx;
+            p.y += p.vy;
+
+            // Screen wrap-around
+            if (p.x < 0) p.x = canvas.width;
+            if (p.x > canvas.width) p.x = 0;
+            if (p.y < 0) p.y = canvas.height;
+            if (p.y > canvas.height) p.y = 0;
+
+            // Draw character
+            ctx.globalAlpha = 0.4;
+            ctx.fillText(p.char, p.x, p.y);
+
+            // Draw connecting lines to nearby particles
+            for (let j = i + 1; j < particles.length; j++) {
+                let p2 = particles[j];
+                let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
+                if (dist < 150) {
+                    ctx.beginPath();
+                    ctx.strokeStyle = "#ff2d75";
+                    ctx.globalAlpha = 1 - (dist / 150); // Fade lines based on distance
+                    ctx.lineWidth = 0.5;
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p2.x, p2.y);
+                    ctx.stroke();
+                }
+            }
         });
-        if(particles.length > 0) requestAnimationFrame(anim);
+        requestAnimationFrame(drawConstellation);
     }
-    anim();
+    drawConstellation();
 }
-
-function zoomImage(img) {
-    const overlay = document.getElementById('image-overlay');
-    document.getElementById('zoomed-img').src = img.src;
-    overlay.style.display = 'flex';
-}
-function closeZoom() { document.getElementById('image-overlay').style.display = 'none'; }
-
-window.onload = startSequence;
