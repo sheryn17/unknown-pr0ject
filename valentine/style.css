@@ -71,12 +71,19 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
 
 .floating-photo {
     position: fixed;
-    width: 120px; height: 120px;
+    width: 140px; 
+    height: 140px;
     object-fit: cover;
     border: 2px solid var(--heart-pink);
     border-radius: 15px;
     z-index: 500;
-    left: var(--x); top: var(--y);
+    
+    /* ADD THESE TWO LINES */
+    left: var(--x); 
+    top: var(--y);
+    transform: translate(-50%, -50%); 
+    
+    /* Keep your existing animation */
     animation: floatAnim 6s ease-in-out infinite alternate;
     box-shadow: 0 0 20px rgba(255, 45, 117, 0.5);
     cursor: pointer;
