@@ -75,3 +75,18 @@ button:hover {
 
 .cursor { animation: blink 1s infinite; }
 @keyframes blink { 50% { opacity: 0; } }
+
+/* Mobile Adjustments */
+@media (max-width: 600px) {
+    .terminal-body {
+        font-size: 14px;
+        padding: 15px;
+    }
+    button {
+        padding: 12px 10px;
+        font-size: 12px;
+    }
+    #terminal-container {
+        width: 95%;
+    }
+}
