@@ -1,9 +1,14 @@
 const output = document.getElementById('output');
 const terminalText = [
-    "Hi my baby...",
-    "Status: Establishing secure link...",
+    "UNAUTHORIZED ACCESS DETECTED...",
+    "Bypassing firewall...",
+    "Injecting Love_Virus.exe...",
+    "System Override: SUCCESS.",
+    "--------------------------------",
+    "Hi my love",
+    "You've been hacked by me hehe 😉",
     "Scanning emotional database...",
-    "Warning: High levels of affection detected."
+    "Warning: Affection levels at 100%."
 ];
 
 let line = 0;
