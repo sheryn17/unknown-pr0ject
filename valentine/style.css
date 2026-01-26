@@ -79,55 +79,64 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     z-index: 500;
 }
 
+/* --- ENVELOPE BASE --- */
 .envelope {
     position: relative;
     width: 300px;
     height: 200px;
-    background: #1a0510; /* This acts as the "inside" color */
-    border: 2px solid var(--heart-pink);
-    overflow: hidden; /* Hides the letter until it slides out */
+    background: #ff2d75; /* The plain pink color */
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 45, 117, 0.3);
 }
 
-/* Allow letter to slide out top when opened */
 .envelope-wrapper.open .envelope {
     overflow: visible;
 }
 
-/* --- THE LAYERS --- */
-.envelope-back {
+/* --- THE POCKET (FRONT) --- */
+.front {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: #1a0510;
-    z-index: 1; /* Bottom layer */
+    width: 0;
+    height: 0;
+    /* This creates the bottom and side folds of a real envelope */
+    border-right: 150px solid #ff4d8d; /* Slightly lighter pink for depth */
+    border-bottom: 100px solid #ff4d8d;
+    border-left: 150px solid #ff4d8d;
+    border-top: 100px solid transparent;
+    z-index: 3;
+    bottom: 0;
 }
 
+/* --- THE FLAP --- */
+.flap {
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 110px solid #ff2d75; /* Match envelope color */
+    z-index: 4;
+    transition: transform 0.6s ease;
+    transform-origin: top;
+}
+
+/* --- THE LETTER (HIDDEN) --- */
 .letter {
     position: absolute;
-    bottom: 5px; /* Sits at the bottom inside */
+    top: 50%;
     left: 5%;
     width: 90%;
-    height: 85%;
+    height: 80%;
     background: white;
-    z-index: 2; /* Middle layer - hidden by flap */
-    transition: transform 0.7s ease-in-out;
+    z-index: 2; /* Sits behind the 'front' and 'flap' */
+    transition: transform 0.7s ease;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 15px;
     box-sizing: border-box;
     border-radius: 5px;
-}
-
-.flap {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: var(--heart-pink);
-    clip-path: polygon(0 0, 100% 0, 50% 50%);
-    z-index: 3; /* Top layer - covers the letter */
-    transition: transform 0.6s ease;
-    transform-origin: top;
+    transform: translateY(-40%); /* Tucked in */
 }
 
 /* --- THE SEAL --- */
@@ -136,40 +145,29 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 4; /* Highest layer */
-    background: var(--heart-pink);
-    color: white;
-    padding: 8px 18px;
-    border-radius: 30px;
-    font-size: 0.9rem;
+    z-index: 5;
+    background: white;
+    color: #ff2d75;
+    padding: 8px 15px;
+    border-radius: 20px;
     font-weight: bold;
-    box-shadow: 0 0 15px var(--heart-pink);
-    animation: pulse-seal 1.5s infinite;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
-/* --- ANIMATION STATES --- */
+/* --- ANIMATION --- */
 .envelope-wrapper.open .flap {
     transform: rotateX(180deg);
-    z-index: 0; /* Flip it behind everything when open */
 }
 
 .envelope-wrapper.open .letter {
-    transform: translateY(-130px); /* Slide UP */
-    z-index: 10; /* Bring to front once it's outside */
+    transform: translateY(-160px); /* Slides up out of the pocket */
+    z-index: 6; /* Pops to the very front to be read */
 }
 
 .envelope-wrapper.open .heart-seal {
     display: none;
 }
-
-@keyframes pulse-seal {
-    0% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.1); }
-    100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-.letter-text h2 { font-size: 1rem; color: var(--heart-pink); margin: 0; }
-.letter-text p { font-size: 0.8rem; color: #333; margin: 10px 0 0 0; font-weight: bold; }
 
 /* Hacker Effects */
 .terminal-body p:first-child {
