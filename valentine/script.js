@@ -2,12 +2,10 @@ const output = document.getElementById('output');
 const terminalText = [
     "UNAUTHORIZED ACCESS DETECTED...",
     "Bypassing firewall...",
-    "Injecting Love_Virus.exe...",
-    "System Override: SUCCESS.",
-    "--------------------------------",
-    "Hi my love",
+    "System Status: Forever yours.",
+    "-------------------------------",
+    "Hi my love!",
     "You've been hacked by me hehe 😉",
-    "Scanning emotional database...",
     "Warning: Affection levels at 100%."
 ];
 
