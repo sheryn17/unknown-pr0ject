@@ -23,7 +23,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 500);
         }
     }, 100); // 100ms * 50 steps = exactly 5 seconds
-});
+});  
+
+
 const output = document.getElementById('output');
 const terminalText = [
     "UNAUTHORIZED ACCESS DETECTED...",
