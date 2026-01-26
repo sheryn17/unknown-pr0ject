@@ -125,12 +125,18 @@ function celebrate() {
     drawConstellation();
 }
 
-// Photo Zoom
-function zoomImage(img) {
-    const overlay = document.getElementById('image-overlay');
-    document.getElementById('zoomed-img').src = img.src;
-    overlay.style.display = 'flex';
+function openEnvelope() {
+    const wrapper = document.querySelector('.envelope-wrapper');
+    wrapper.classList.toggle('open');
 }
-function closeZoom() { document.getElementById('image-overlay').style.display = 'none'; }
 
-window.onload = startSequence;
+// Ensure your celebrate function still triggers the gallery show:
+function celebrate() {
+    document.getElementById('terminal-container').style.display = 'none';
+    document.getElementById('heartCanvas').style.display = 'none';
+    const gallery = document.getElementById('photo-gallery');
+    gallery.classList.remove('hidden');
+    
+    // Start the background constellation effect as usual
+    initConstellation(); 
+}
