@@ -1,7 +1,7 @@
 const output = document.getElementById('output');
 const terminalText = [
     "UNAUTHORIZED ACCESS DETECTED...",
-    "Bypassing firewall...",
+    "Injecting Love_Virus.exe...",
     "System Status: Forever yours.",
     "-------------------------------",
     "Hi my love!",
