@@ -80,97 +80,106 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
 }
 
 /* --- ENVELOPE BASE --- */
+/* --- ENVELOPE BASE --- */
 .envelope {
     position: relative;
-    width: 300px;
-    height: 200px;
-    background: #ff2d75; /* Plain pink */
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(255, 45, 117, 0.3);
+    width: 320px; /* Slightly wider for longer text */
+    height: 220px;
+    background: #ff2d75;
+    overflow: hidden; /* This hides the letter initially */
+    box-shadow: 0 0 30px rgba(255, 45, 117, 0.4);
 }
 
 .envelope-wrapper.open .envelope {
-    overflow: visible;
+    overflow: visible; /* Allows letter to slide out */
 }
 
-/* --- THE POCKET (FRONT) --- */
+/* --- THE POCKET (FRONT PANEL) --- */
 .front {
     position: absolute;
     width: 0;
     height: 0;
-    border-right: 150px solid #ff4d8d; /* Side folds */
-    border-bottom: 100px solid #ff4d8d; /* Bottom fold */
-    border-left: 150px solid #ff4d8d;
-    border-top: 100px solid transparent;
-    z-index: 3;
+    /* This creates the V-shape pocket that hides the letter */
+    border-right: 160px solid #ff4d8d; 
+    border-bottom: 110px solid #ff4d8d;
+    border-left: 160px solid #ff4d8d;
+    border-top: 110px solid transparent;
+    z-index: 3; /* Must be higher than the letter (z:2) */
     bottom: 0;
 }
 
-/* --- THE TOP FLAP --- */
+/* --- THE FLAP --- */
 .flap {
     position: absolute;
     top: 0; left: 0;
     width: 0; height: 0;
-    border-left: 150px solid transparent;
-    border-right: 150px solid transparent;
-    border-top: 110px solid #ff2d75;
-    z-index: 4;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 115px solid #ff2d75;
+    z-index: 4; /* Top-most layer when closed */
     transition: transform 0.6s ease;
     transform-origin: top;
 }
 
-/* --- THE LETTER (STAYS BEHIND FRONT/FLAP) --- */
+/* --- THE LETTER (SCROLLABLE) --- */
 .letter {
     position: absolute;
-    top: 50%;
+    bottom: 0;
     left: 5%;
     width: 90%;
-    height: 80%;
+    height: 95%; /* Fits inside the envelope */
     background: white;
-    z-index: 2; /* Sits between back and front */
+    z-index: 2; /* Sandwiched between back and front */
     transition: transform 0.7s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-    box-sizing: border-box;
     border-radius: 5px;
-    transform: translateY(-40%);
+    padding: 10px;
+    box-sizing: border-box;
 }
 
-/* --- THE SMALL HEART SEAL --- */
+.letter-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto; /* Makes long messages scrollable! */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+/* Hide scrollbar for a cleaner look but keep functionality */
+.letter-content::-webkit-scrollbar {
+    width: 4px;
+}
+.letter-content::-webkit-scrollbar-thumb {
+    background: var(--heart-pink);
+    border-radius: 10px;
+}
+
+/* --- THE HEART SEAL --- */
 .heart-seal {
     position: absolute;
-    top: 50%;
+    top: 55%; /* Centered on the flap tip */
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 5;
-    font-size: 1.5rem; /* Small and elegant */
+    font-size: 1.8rem;
     cursor: pointer;
-    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    filter: drop-shadow(0 0 10px white);
     animation: heartbeat 1.5s infinite;
-    transition: 0.3s;
 }
 
-@keyframes heartbeat {
-    0% { transform: translate(-50%, -50%) scale(1); }
-    50% { transform: translate(-50%, -50%) scale(1.2); }
-    100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-/* --- OPEN STATES --- */
+/* --- OPEN STATE --- */
 .envelope-wrapper.open .flap {
     transform: rotateX(180deg);
+    z-index: 1; /* Move behind once opened */
 }
 
 .envelope-wrapper.open .letter {
-    transform: translateY(-160px); /* Slides out of pocket */
-    z-index: 6; /* Moves to front when revealed */
+    transform: translateY(-150px); /* Slide up to show the message */
+    z-index: 10; /* Pop to front once open */
+    height: 250px; /* Allow letter to grow when open */
 }
 
 .envelope-wrapper.open .heart-seal {
-    opacity: 0; /* Heart vanishes when envelope opens */
-    pointer-events: none;
+    opacity: 0;
 }
 
 /* Hacker Effects */
