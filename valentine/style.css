@@ -84,7 +84,7 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     position: relative;
     width: 300px;
     height: 200px;
-    background: #ff2d75; /* The plain pink color */
+    background: #ff2d75; /* Plain pink */
     overflow: hidden;
     box-shadow: 0 0 20px rgba(255, 45, 117, 0.3);
 }
@@ -98,29 +98,28 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     position: absolute;
     width: 0;
     height: 0;
-    /* This creates the bottom and side folds of a real envelope */
-    border-right: 150px solid #ff4d8d; /* Slightly lighter pink for depth */
-    border-bottom: 100px solid #ff4d8d;
+    border-right: 150px solid #ff4d8d; /* Side folds */
+    border-bottom: 100px solid #ff4d8d; /* Bottom fold */
     border-left: 150px solid #ff4d8d;
     border-top: 100px solid transparent;
     z-index: 3;
     bottom: 0;
 }
 
-/* --- THE FLAP --- */
+/* --- THE TOP FLAP --- */
 .flap {
     position: absolute;
     top: 0; left: 0;
     width: 0; height: 0;
     border-left: 150px solid transparent;
     border-right: 150px solid transparent;
-    border-top: 110px solid #ff2d75; /* Match envelope color */
+    border-top: 110px solid #ff2d75;
     z-index: 4;
     transition: transform 0.6s ease;
     transform-origin: top;
 }
 
-/* --- THE LETTER (HIDDEN) --- */
+/* --- THE LETTER (STAYS BEHIND FRONT/FLAP) --- */
 .letter {
     position: absolute;
     top: 50%;
@@ -128,7 +127,7 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     width: 90%;
     height: 80%;
     background: white;
-    z-index: 2; /* Sits behind the 'front' and 'flap' */
+    z-index: 2; /* Sits between back and front */
     transition: transform 0.7s ease;
     display: flex;
     justify-content: center;
@@ -136,37 +135,42 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     padding: 15px;
     box-sizing: border-box;
     border-radius: 5px;
-    transform: translateY(-40%); /* Tucked in */
+    transform: translateY(-40%);
 }
 
-/* --- THE SEAL --- */
+/* --- THE SMALL HEART SEAL --- */
 .heart-seal {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 5;
-    background: white;
-    color: #ff2d75;
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
+    font-size: 1.5rem; /* Small and elegant */
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    animation: heartbeat 1.5s infinite;
+    transition: 0.3s;
 }
 
-/* --- ANIMATION --- */
+@keyframes heartbeat {
+    0% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.2); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+/* --- OPEN STATES --- */
 .envelope-wrapper.open .flap {
     transform: rotateX(180deg);
 }
 
 .envelope-wrapper.open .letter {
-    transform: translateY(-160px); /* Slides up out of the pocket */
-    z-index: 6; /* Pops to the very front to be read */
+    transform: translateY(-160px); /* Slides out of pocket */
+    z-index: 6; /* Moves to front when revealed */
 }
 
 .envelope-wrapper.open .heart-seal {
-    display: none;
+    opacity: 0; /* Heart vanishes when envelope opens */
+    pointer-events: none;
 }
 
 /* Hacker Effects */
