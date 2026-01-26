@@ -66,77 +66,26 @@ function drawHeart() {
     animate();
 }
 
-// UNIQUE CELEBRATION: Digital Constellation
 function celebrate() {
+    // Hide the terminal and the drawn heart
     document.getElementById('terminal-container').style.display = 'none';
     document.getElementById('heartCanvas').style.display = 'none';
-    const gallery = document.getElementById('photo-gallery');
+    
+    // Show the envelope container
+    const gallery = document.getElementById('photo-gallery'); 
     gallery.classList.remove('hidden');
     
+    // Initialize the background constellation
     const canvas = document.getElementById('binaryCanvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    const ctx = canvas.getContext('2d');
     
-    let particles = [];
-    for(let i=0; i<80; i++) {
-        particles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            vx: (Math.random() - 0.5) * 0.5,
-            vy: (Math.random() - 0.5) * 0.5,
-            char: ["1", "0", "❤", "{ }"][Math.floor(Math.random() * 4)]
-        });
-    }
-
-    function drawConstellation() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = "#ff2d75";
-        ctx.font = "14px monospace";
-        
-        particles.forEach((p, i) => {
-            p.x += p.vx;
-            p.y += p.vy;
-
-            if (p.x < 0) p.x = canvas.width;
-            if (p.x > canvas.width) p.x = 0;
-            if (p.y < 0) p.y = canvas.height;
-            if (p.y > canvas.height) p.y = 0;
-
-            ctx.globalAlpha = 0.4;
-            ctx.fillText(p.char, p.x, p.y);
-
-            for (let j = i + 1; j < particles.length; j++) {
-                let p2 = particles[j];
-                let dist = Math.hypot(p.x - p2.x, p.y - p2.y);
-                if (dist < 150) {
-                    ctx.beginPath();
-                    ctx.strokeStyle = "#ff2d75";
-                    ctx.globalAlpha = (1 - (dist / 150)) * 0.5;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(p.x, p.y);
-                    ctx.lineTo(p2.x, p2.y);
-                    ctx.stroke();
-                }
-            }
-        });
-        requestAnimationFrame(drawConstellation);
-    }
-    drawConstellation();
+    // Start your constellation animation logic here
+    initConstellation(); 
 }
 
+// Add this so the envelope actually opens when clicked
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
     wrapper.classList.toggle('open');
-}
-
-// Ensure your celebrate function still triggers the gallery show:
-function celebrate() {
-    document.getElementById('terminal-container').style.display = 'none';
-    document.getElementById('heartCanvas').style.display = 'none';
-    const gallery = document.getElementById('photo-gallery');
-    gallery.classList.remove('hidden');
-    
-    // Start the background constellation effect as usual
-    initConstellation(); 
 }
