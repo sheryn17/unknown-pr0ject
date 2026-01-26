@@ -1,3 +1,10 @@
+window.onload = () => {
+    setTimeout(() => {
+        document.getElementById('fake-loading').style.display = 'none';
+        startTerminal(); // This starts your hacker text
+    }, 3000); // Shows boring loader for 3 seconds
+};
+
 const output = document.getElementById('output');
 const terminalText = [
     "UNAUTHORIZED ACCESS DETECTED...",
