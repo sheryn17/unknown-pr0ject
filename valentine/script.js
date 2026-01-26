@@ -1,10 +1,19 @@
-window.onload = () => {
+// This ensures the timer starts immediately
+document.addEventListener("DOMContentLoaded", () => {
+    const loadingScreen = document.getElementById('fake-loading');
+    
     setTimeout(() => {
-        document.getElementById('fake-loading').style.display = 'none';
-        startTerminal(); // This starts your hacker text
-    }, 3000); // Shows boring loader for 3 seconds
-};
-
+        // Add a fade-out effect for a smoother transition
+        loadingScreen.style.opacity = '0';
+        
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+            if (typeof startTerminal === "function") {
+                startTerminal(); // Starts your hacker sequence
+            }
+        }, 500); // Time for the fade-out animation
+    }, 5000); // STRICT 5 SECONDS
+});
 const output = document.getElementById('output');
 const terminalText = [
     "UNAUTHORIZED ACCESS DETECTED...",
