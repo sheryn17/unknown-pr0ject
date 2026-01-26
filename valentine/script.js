@@ -13,7 +13,6 @@ const terminalText = [
 
 let line = 0;
 
-// Typewriter Effect
 async function startSequence() {
     for (let text of terminalText) {
         let p = document.createElement('p');
@@ -29,7 +28,6 @@ async function startSequence() {
     document.getElementById('continue-step').classList.remove('hidden');
 }
 
-// Access Granted Trigger
 document.getElementById('continue-btn').addEventListener('click', async () => {
     document.getElementById('continue-step').classList.add('hidden');
     let p = document.createElement('p');
@@ -40,7 +38,6 @@ document.getElementById('continue-btn').addEventListener('click', async () => {
     drawHeart();
 });
 
-// Drawing the Neon Heart
 function drawHeart() {
     const canvas = document.getElementById('heartCanvas');
     const ctx = canvas.getContext('2d');
@@ -67,25 +64,51 @@ function drawHeart() {
 }
 
 function celebrate() {
-    // Hide the terminal and the drawn heart
     document.getElementById('terminal-container').style.display = 'none';
     document.getElementById('heartCanvas').style.display = 'none';
-    
-    // Show the envelope container
     const gallery = document.getElementById('photo-gallery'); 
     gallery.classList.remove('hidden');
-    
-    // Initialize the background constellation
-    const canvas = document.getElementById('binaryCanvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    
-    // Start your constellation animation logic here
     initConstellation(); 
 }
 
-// Add this so the envelope actually opens when clicked
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
     wrapper.classList.toggle('open');
 }
+
+function initConstellation() {
+    const canvas = document.getElementById('binaryCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    let particles = [];
+    for(let i=0; i<70; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            vx: (Math.random() - 0.5) * 0.5,
+            vy: (Math.random() - 0.5) * 0.5,
+            char: ["1", "0", "❤"][Math.floor(Math.random() * 3)]
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = "#ff2d75";
+        ctx.font = "12px monospace";
+        particles.forEach(p => {
+            p.x += p.vx; p.y += p.vy;
+            if(p.x < 0) p.x = canvas.width;
+            if(p.x > canvas.width) p.x = 0;
+            if(p.y < 0) p.y = canvas.height;
+            if(p.y > canvas.height) p.y = 0;
+            ctx.globalAlpha = 0.3;
+            ctx.fillText(p.char, p.x, p.y);
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+}
+
+window.onload = startSequence;
