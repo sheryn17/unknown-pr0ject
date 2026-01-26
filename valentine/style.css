@@ -78,8 +78,44 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     cursor: pointer;
     z-index: 500;
 }
+/* --- ENVELOPE ENTRANCE ANIMATION --- */
+@keyframes popZoom {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1.1); /* Slight overshoot for a "bounce" */
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+}
 
-/* --- ENVELOPE BASE --- */
+.envelope-wrapper {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    z-index: 500;
+    /* This triggers the pop zoom when the envelope first appears */
+    animation: popZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transition: transform 0.3s ease; /* Smooth transition for hover */
+}
+
+/* --- HOVER "POP" EFFECT --- */
+.envelope-wrapper:hover {
+    /* Makes the envelope grow slightly when she hovers her mouse */
+    transform: translate(-50%, -50%) scale(1.05);
+}
+
+/* Ensure the zoom doesn't break the open state */
+.envelope-wrapper.open {
+    animation: none; /* Stop the entrance animation if it's already open */
+    transform: translate(-50%, -50%) scale(1);
+}
 /* --- ENVELOPE BASE --- */
 .envelope {
     position: relative;
@@ -180,6 +216,17 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
 
 .envelope-wrapper.open .heart-seal {
     opacity: 0;
+}
+
+.envelope {
+    /* ... existing styles ... */
+    box-shadow: 0 0 20px rgba(255, 45, 117, 0.5);
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { box-shadow: 0 0 10px rgba(255, 45, 117, 0.3); }
+    to { box-shadow: 0 0 30px rgba(255, 45, 117, 0.8); }
 }
 
 /* Hacker Effects */
