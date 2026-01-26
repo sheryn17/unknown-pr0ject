@@ -219,3 +219,18 @@ body::before {
     opacity: 0;
     transform: translate(-50%, -150%) scale(0);
 }
+
+.system-log {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0, 255, 65, 0.1);
+    border: 1px solid var(--neon-green);
+    color: var(--neon-green);
+    padding: 10px;
+    font-size: 0.7rem;
+    z-index: 1000;
+    font-family: monospace;
+    animation: slideUp 0.5s ease-out;
+}
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
