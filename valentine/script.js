@@ -28,10 +28,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const output = document.getElementById('output');
 const terminalText = [
-    
+
     "UNAUTHORIZED ACCESS DETECTED...",
     "Bypassing firewall...",
     "Injecting Love_Virus.exe...",
+    "Downloading: My_Whole_World.zip",
     "-------------------------------",
     "Hi my love!",
     "You've been hacked by me hehe 😉",
