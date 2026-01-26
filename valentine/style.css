@@ -178,3 +178,19 @@ body::before {
     background-size: 100% 3px, 3px 100%;
     pointer-events: none;
 }
+
+.heart-seal {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; /* Above the flap */
+    font-size: 2rem;
+    filter: drop-shadow(0 0 10px var(--heart-pink));
+    transition: 0.5s;
+}
+
+.envelope-wrapper.open .heart-seal {
+    opacity: 0;
+    transform: translate(-50%, -150%) scale(0);
+}
