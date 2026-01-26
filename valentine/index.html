@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="fake-loading">
+<div id="fake-loading">
     <div class="spinner"></div>
-    <p>Loading System Files (404)...</p>
+    <p id="loading-text">Initializing System Recovery...</p>
+    <div class="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+    <p style="font-size: 0.6rem; margin-top: 10px; opacity: 0.5;">Error Code: 0x80070005</p>
 </div>
 
     <canvas id="heartCanvas"></canvas>

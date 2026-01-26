@@ -1,18 +1,28 @@
-// This ensures the timer starts immediately
 document.addEventListener("DOMContentLoaded", () => {
+    const bar = document.getElementById('progress-bar');
+    const loadingText = document.getElementById('loading-text');
     const loadingScreen = document.getElementById('fake-loading');
     
-    setTimeout(() => {
-        // Add a fade-out effect for a smoother transition
-        loadingScreen.style.opacity = '0';
-        
-        setTimeout(() => {
-            loadingScreen.style.display = 'none';
-            if (typeof startTerminal === "function") {
-                startTerminal(); // Starts your hacker sequence
-            }
-        }, 500); // Time for the fade-out animation
-    }, 5000); // STRICT 5 SECONDS
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += 2; // Fill by 2% every 100ms
+        bar.style.width = progress + '%';
+
+        // Add "boring" text changes to sell the fake error
+        if (progress === 40) loadingText.innerText = "Checking local disk...";
+        if (progress === 80) loadingText.innerText = "Attempting to bypass error...";
+
+        if (progress >= 100) {
+            clearInterval(interval);
+            
+            // Start the transition
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                if (typeof startTerminal === "function") startTerminal();
+            }, 500);
+        }
+    }, 100); // 100ms * 50 steps = exactly 5 seconds
 });
 const output = document.getElementById('output');
 const terminalText = [
