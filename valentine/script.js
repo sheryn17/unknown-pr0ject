@@ -100,7 +100,34 @@ function celebrate() {
 
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
-    wrapper.classList.toggle('open');
+    wrapper.classList.add('open');
+    
+    // Wait for the letter to finish sliding up before showing the alert
+    setTimeout(() => {
+        showSystemAlert();
+    }, 1000); 
+}
+
+function showSystemAlert() {
+    const notif = document.getElementById('system-notification');
+    const sound = document.getElementById('notif-sound');
+    const progress = document.querySelector('.notif-progress');
+
+    // Play the "ding" sound
+    sound.play().catch(e => console.log("Sound blocked by browser"));
+
+    // Slide the notification in
+    notif.classList.add('show');
+    progress.classList.add('active');
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        closeNotif();
+    }, 5500);
+}
+
+function closeNotif() {
+    document.getElementById('system-notification').classList.remove('show');
 }
 
 function initConstellation() {

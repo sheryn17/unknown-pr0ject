@@ -323,3 +323,58 @@ body::before {
     background: #333; /* Keep it gray/boring */
     transition: width 0.1s linear;
 }
+
+#system-notification {
+    position: fixed;
+    top: 20px;
+    right: -350px; /* Hidden off-screen initially */
+    width: 300px;
+    background: rgba(26, 5, 16, 0.95);
+    border: 1px solid var(--heart-pink);
+    border-radius: 8px;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 2000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#system-notification.show {
+    right: 20px; /* Slides into view */
+}
+
+.notif-header {
+    background: rgba(255, 45, 117, 0.2);
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 45, 117, 0.3);
+}
+
+.notif-icon { margin-right: 8px; }
+.notif-title { flex-grow: 1; color: var(--heart-pink); }
+.notif-close { background: none; border: none; color: white; cursor: pointer; font-size: 1rem; }
+
+.notif-body {
+    padding: 15px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.notif-progress {
+    height: 3px;
+    background: var(--heart-pink);
+    width: 0%;
+}
+
+/* Animation for the progress bar */
+.notif-progress.active {
+    animation: notifTimer 5s linear forwards;
+}
+
+@keyframes notifTimer {
+    from { width: 100%; }
+    to { width: 0%; }
+}
