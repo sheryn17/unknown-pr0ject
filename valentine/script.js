@@ -101,34 +101,35 @@ function celebrate() {
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
     
+    // Prevent opening if it's already open
     if (wrapper.classList.contains('open')) return;
     
-    // --- START GLITCH EFFECT ---
-    // This briefly inverts the colors and shifts the hue for a "system hack" feel
-    document.body.style.transition = "none"; 
-    document.body.style.filter = "invert(1) hue-rotate(180deg) contrast(1.5)";
-    
+    // The Glitch Effect
+    document.body.style.filter = "invert(1) hue-rotate(180deg)";
     setTimeout(() => {
-        document.body.style.transition = "filter 0.3s ease";
-        document.body.style.filter = "none"; // Return to normal
-    }, 150); // The glitch lasts 150ms
-    // --- END GLITCH EFFECT ---
+        document.body.style.filter = "none";
+    }, 150);
 
     wrapper.classList.add('open');
     
-    // Show the System Alert notification
+    // Show System Alert
     if (typeof showSystemAlert === "function") {
         setTimeout(showSystemAlert, 600);
     }
 }
 
+// MAKE SURE THIS FUNCTION NAME MATCHES YOUR HTML onclick="closeEnvelope(event)"
 function closeEnvelope(event) {
-    event.stopPropagation();
+    // 1. This stops the "open" function from firing immediately after clicking close
+    event.stopPropagation(); 
+
     const wrapper = document.querySelector('.envelope-wrapper');
     wrapper.classList.remove('open');
     
-    if (typeof closeNotif === "function") {
-        closeNotif();
+    // 2. Hide the alert if it's open
+    const notif = document.getElementById('system-notification');
+    if (notif) {
+        notif.classList.remove('show');
     }
 }
 

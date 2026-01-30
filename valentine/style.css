@@ -398,3 +398,21 @@ body::before {
 body {
     transition: filter 0.3s ease;
 }
+.close-btn {
+    position: relative;
+    z-index: 20; /* High z-index ensures it sits above all envelope layers */
+    display: block;
+    margin: 20px auto 10px;
+    background: transparent;
+    border: 1px solid #ff2d75;
+    color: #ff2d75;
+    font-family: 'Courier New', monospace;
+    padding: 8px 20px;
+    cursor: pointer;
+    pointer-events: auto; /* Forces the button to be clickable */
+}
+
+/* Ensure the letter is on top of the envelope front when open */
+.envelope-wrapper.open .letter {
+    z-index: 15;
+}
