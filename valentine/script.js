@@ -245,3 +245,48 @@ function createBackgroundParticle() {
 
 // Start the mix
 setInterval(createBackgroundParticle, 1000);
+
+let heartCharge = 0;
+const chargeNeeded = 10; // How many taps to unlock?
+
+function chargeHeart() {
+    heartCharge++;
+    
+    // Update visuals
+    const fill = document.querySelector('.heart-fill');
+    const syncVal = document.getElementById('sync-val');
+    
+    // Calculate progress
+    const progress = (heartCharge / chargeNeeded);
+    fill.style.transform = `scale(${progress})`;
+    syncVal.innerText = Math.floor(progress * 100);
+
+    // Add a tiny shake effect on tap
+    document.querySelector('.heart-container').style.transform = 'scale(1.1)';
+    setTimeout(() => {
+        document.querySelector('.heart-container').style.transform = 'scale(1)';
+    }, 100);
+
+    // Check if full
+    if (heartCharge >= chargeNeeded) {
+        unlockEnvelope();
+    }
+}
+
+function unlockEnvelope() {
+    // 1. Final Glitch
+    document.body.style.filter = "invert(1) hue-rotate(180deg)";
+    
+    setTimeout(() => {
+        document.body.style.filter = "none";
+        
+        // 2. Hide Gate, Show Envelope
+        document.getElementById('unlock-gate').style.display = 'none';
+        const gallery = document.getElementById('photo-gallery');
+        gallery.style.display = 'block';
+        gallery.classList.remove('hidden');
+        
+        // 3. Play Success Sound (optional)
+        document.getElementById('notif-sound').play().catch(() => {});
+    }, 300)
+}
