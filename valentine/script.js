@@ -288,22 +288,38 @@ function chargeHeart() {
 }
 
 function completeSync() {
-    // Brief Glitch Effect
+    // 1. Brief glitch effect
     document.body.style.filter = "invert(1)";
     
     setTimeout(() => {
         document.body.style.filter = "none";
+        
+        // 2. Hide the tapping heart gate
         document.getElementById('unlock-gate').style.display = 'none';
         
+        // 3. Reveal the envelope wrapper
         const envelopeWrap = document.querySelector('.envelope-wrapper');
-        envelopeWrap.style.display = 'block';
+        envelopeWrap.style.display = 'block'; 
         
-        // Final opening animation
+        // 4. Trigger the opening animation and the SLIDE notification
         setTimeout(() => {
             envelopeWrap.classList.add('open');
-            // Play notification sound
+            
+            // --- THIS IS THE MISSING LINK ---
+            showSystemAlert(); 
+            
+            // Optional: Play a "beep" or "ding"
             const sound = document.getElementById('notif-sound');
-            if(sound) sound.play();
+            if(sound) sound.play().catch(() => {});
         }, 500);
     }, 200);
+}
+
+// Function to slide the notification in
+function showSystemAlert() {
+    const notif = document.getElementById('system-notification');
+    if (notif) {
+        notif.classList.add('show');
+        console.log("Notification Triggered!"); // Helpful for debugging
+    }
 }

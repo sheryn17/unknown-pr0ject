@@ -32,35 +32,28 @@
                 <button id="continue-btn">CONTINUE_PROMPT</button>
             </div>
 
-            <div id="action-buttons" class="hidden">
-                <p id="proposal-question">Will you be my valentine, baby?</p>
-                <div class="btn-group">
-                    <button class="yes-btn" onclick="celebrate()">yes!</button>
-                    <button class="yes-btn" onclick="celebrate()">or still yes? hehe 🥰</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
 <div id="photo-gallery" class="hidden">
     
-    <div id="valentine-question">
-        <h2 class="terminal-text">> CRITICAL_QUERY: WILL_YOU_BE_MY_VALENTINE?</h2>
+    <div id="valentine-question" class="content-box">
+        <h2 class="terminal-text">> CRITICAL_QUERY: <br>WILL_YOU_BE_MY_VALENTINE?</h2>
         <div class="choice-buttons">
             <button class="hack-btn" onclick="startSync()">[ YES ]</button>
             <button class="hack-btn" id="no-btn" onmouseover="moveNo()">[ NO ]</button>
         </div>
     </div>
 
-    <div id="unlock-gate" style="display: none;">
+    <div id="unlock-gate" style="display: none;" class="content-box">
         <div class="heart-container" onclick="chargeHeart()">
             <div class="heart-outline"></div>
             <div class="heart-fill"></div>
-            <div class="tap-text">TAP TO SYNC HEARTS</div>
+            <div class="tap-text">TAP TO AUTHORIZE</div>
         </div>
-        <div class="sync-status">UPLOADING_YES: <span id="sync-val">0</span>%</div>
+        <div class="sync-status">SYNC_LEVEL: <span id="sync-val">0</span>%</div>
     </div>
-
+    
+    </div>
+    
     <div class="envelope-wrapper" style="display: none;">
         <div class="envelope">
             <div class="back"></div>
