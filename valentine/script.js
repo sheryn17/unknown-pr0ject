@@ -122,41 +122,21 @@ function openEnvelope() {
     }
 }
 
-// MAKE SURE THIS FUNCTION NAME MATCHES YOUR HTML onclick="closeEnvelope(event)"
 function closeEnvelope(event) {
-    if (event) event.stopPropagation();
+    if (event) event.stopPropagation(); 
     
-    const wrapper = document.querySelector('.envelope-wrapper');
-    wrapper.classList.remove('open'); // Slide the letter back down
-    
-    setTimeout(() => {
-        wrapper.style.display = 'none'; // Hide the whole thing
-        document.getElementById('reopen-btn').style.display = 'block'; // Show the key
-    }, 600); // Match this time to your CSS transition speed
+    const envelopeWrap = document.querySelector('.envelope-wrapper');
+    // We ONLY remove the 'open' class. We do NOT hide the wrapper.
+    envelopeWrap.classList.remove('open'); 
 }
 
-function reopenEnvelope() {
-    // 1. Hide the button immediately
-    const btn = document.getElementById('reopen-btn');
-    if (btn) btn.style.display = 'none';
-    
-    // 2. Target the wrapper and the envelope itself
-    const wrapper = document.querySelector('.envelope-wrapper');
-    const envelope = document.querySelector('.envelope');
-
-    if (wrapper) {
-        // Force display back to block
-        wrapper.style.display = 'block';
-        wrapper.style.opacity = '1';
-        
-        // 3. Small delay to allow the browser to register the display change
-        setTimeout(() => {
-            wrapper.classList.add('open');
-            // If your CSS uses the .open class on the wrapper to move the letter:
-            console.log("Re-accessing file... Decrypting heart.");
-        }, 100);
+// Add this to allow her to click the envelope to open it again
+document.querySelector('.envelope-wrapper').addEventListener('click', function() {
+    if (!this.classList.contains('open')) {
+        this.classList.add('open');
     }
-}
+});
+
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
     const sound = document.getElementById('notif-sound');
@@ -312,27 +292,20 @@ function chargeHeart() {
 }
 
 function completeSync() {
-    // 1. Brief glitch effect
     document.body.style.filter = "invert(1)";
     
     setTimeout(() => {
         document.body.style.filter = "none";
-        
-        // 2. Hide the tapping heart gate
         document.getElementById('unlock-gate').style.display = 'none';
         
-        // 3. Reveal the envelope wrapper
         const envelopeWrap = document.querySelector('.envelope-wrapper');
+        // Ensure it is visible and stays visible
         envelopeWrap.style.display = 'block'; 
         
-        // 4. Trigger the opening animation and the SLIDE notification
         setTimeout(() => {
             envelopeWrap.classList.add('open');
+            showSystemAlert();
             
-            // --- THIS IS THE MISSING LINK ---
-            showSystemAlert(); 
-            
-            // Optional: Play a "beep" or "ding"
             const sound = document.getElementById('notif-sound');
             if(sound) sound.play().catch(() => {});
         }, 500);

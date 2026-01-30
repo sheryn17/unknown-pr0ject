@@ -98,12 +98,9 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    cursor: pointer;
-    z-index: 500;
-    /* This triggers the pop zoom when the envelope first appears */
-    animation: popZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    transition: transform 0.3s ease; /* Smooth transition for hover */
-}
+    cursor: pointer; /* Shows it can be clicked again */
+    display: none; /* Only hidden until the first sync is done */
+    z-index: 10001;
 
 /* --- HOVER "POP" EFFECT --- */
 .envelope-wrapper:hover {
