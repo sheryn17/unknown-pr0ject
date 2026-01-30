@@ -122,20 +122,20 @@ function openEnvelope() {
     }
 }
 
+// MAKE SURE THIS FUNCTION NAME MATCHES YOUR HTML onclick="closeEnvelope(event)"
 function closeEnvelope(event) {
-    if (event) event.stopPropagation(); 
-    
-    const envelopeWrap = document.querySelector('.envelope-wrapper');
-    // We ONLY remove the 'open' class. We do NOT hide the wrapper.
-    envelopeWrap.classList.remove('open'); 
-}
+    // 1. This stops the "open" function from firing immediately after clicking close
+    event.stopPropagation(); 
 
-// Add this to allow her to click the envelope to open it again
-document.querySelector('.envelope-wrapper').addEventListener('click', function() {
-    if (!this.classList.contains('open')) {
-        this.classList.add('open');
+    const wrapper = document.querySelector('.envelope-wrapper');
+    wrapper.classList.remove('open');
+    
+    // 2. Hide the alert if it's open
+    const notif = document.getElementById('system-notification');
+    if (notif) {
+        notif.classList.remove('show');
     }
-});
+}
 
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
@@ -247,19 +247,17 @@ function createBackgroundParticle() {
 setInterval(createBackgroundParticle, 1000);
 
 let heartCharge = 0;
-const chargeNeeded = 10; // Number of taps required
+const chargeNeeded = 10;
 
-// 1. Move the No Button
+// 1. Move the NO button
 function moveNo() {
     const btn = document.getElementById('no-btn');
-    const x = Math.random() * (window.innerWidth - btn.offsetWidth);
-    const y = Math.random() * (window.innerHeight - btn.offsetHeight);
     btn.style.position = 'fixed';
-    btn.style.left = x + 'px';
-    btn.style.top = y + 'px';
+    btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
+    btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
 }
 
-// 2. Start Sync after clicking YES
+// 2. Start Sync after YES
 function startSync() {
     // Hide the question
     document.getElementById('valentine-question').style.display = 'none';
@@ -269,54 +267,49 @@ function startSync() {
     gate.style.display = 'flex'; 
 }
 
-// 3. The Tapping Logic
+// 3. Tapping Heart
 function chargeHeart() {
     heartCharge++;
     const fill = document.querySelector('.heart-fill');
     const syncVal = document.getElementById('sync-val');
-    const container = document.querySelector('.heart-container');
     
-    // Update fill and text
     let progress = heartCharge / chargeNeeded;
     fill.style.transform = `scale(${progress})`;
     syncVal.innerText = Math.floor(progress * 100);
 
-    // Physical feedback (Pulse on tap)
-    container.style.transform = 'scale(1.2)';
-    setTimeout(() => container.style.transform = 'scale(1)', 100);
-
-    // 4. Reveal Envelope when 100%
     if (heartCharge >= chargeNeeded) {
         completeSync();
     }
 }
 
+// 4. Reveal Letter and Notification
 function completeSync() {
-    document.body.style.filter = "invert(1)";
+    document.body.style.filter = "invert(1)"; // Brief glitch
     
     setTimeout(() => {
         document.body.style.filter = "none";
         document.getElementById('unlock-gate').style.display = 'none';
         
         const envelopeWrap = document.querySelector('.envelope-wrapper');
-        // Ensure it is visible and stays visible
-        envelopeWrap.style.display = 'block'; 
+        envelopeWrap.style.display = 'block';
         
         setTimeout(() => {
             envelopeWrap.classList.add('open');
+            
+            // --- TRIGGER THE SLIDE NOTIFICATION ---
             showSystemAlert();
             
-            const sound = document.getElementById('notif-sound');
-            if(sound) sound.play().catch(() => {});
+            document.getElementById('notif-sound').play().catch(()=>{});
         }, 500);
     }, 200);
 }
 
-// Function to slide the notification in
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
-    if (notif) {
-        notif.classList.add('show');
-        console.log("Notification Triggered!"); // Helpful for debugging
-    }
+    notif.classList.add('show');
+    setTimeout(closeNotif, 5000);
+}
+
+function closeNotif() {
+    document.getElementById('system-notification').classList.remove('show');
 }

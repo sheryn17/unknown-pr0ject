@@ -98,9 +98,12 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    cursor: pointer; /* Shows it can be clicked again */
-    display: none; /* Only hidden until the first sync is done */
-    z-index: 10001;
+    cursor: pointer;
+    z-index: 500;
+    /* This triggers the pop zoom when the envelope first appears */
+    animation: popZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    transition: transform 0.3s ease; /* Smooth transition for hover */
+}
 
 /* --- HOVER "POP" EFFECT --- */
 .envelope-wrapper:hover {
@@ -492,79 +495,3 @@ body {
     text-shadow: 0 0 10px #ff2d75;
 }
 
-/* Container to make text pop against falling background items */
-.content-box {
-    background: rgba(10, 10, 10, 0.8);
-    padding: 40px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 45, 117, 0.3);
-    backdrop-filter: blur(5px); /* Blurs photos behind the text */
-    text-align: center;
-}
-
-/* High-Visibility Neon Text */
-.terminal-text {
-    color: #ff2d75 !important;
-    font-size: 1.8rem;
-    margin-bottom: 30px;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px #ff2d75, 0 0 20px #ff2d75;
-    line-height: 1.4;
-}
-
-.sync-status {
-    color: #00ffcc !important; /* Changed to Neon Cyan for contrast */
-    font-weight: bold;
-    font-size: 1.5rem;
-    text-shadow: 0 0 10px #00ffcc;
-    margin-top: 20px;
-}
-
-.tap-text {
-    position: absolute;
-    bottom: -40px;
-    width: 100%;
-    color: #ffffff !important;
-    font-size: 0.8rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    text-shadow: 0 0 5px #ff2d75;
-}
-
-/* Fix for the "NO" button so it's visible */
-.hack-btn {
-    border: 2px solid #ff2d75;
-    background: rgba(255, 45, 117, 0.1);
-    color: #ff2d75 !important;
-    font-weight: bold;
-    padding: 12px 25px;
-    cursor: pointer;
-    font-family: 'Courier New', monospace;
-    transition: 0.3s;
-}
-
-.hack-btn:hover {
-    background: #ff2d75;
-    color: white !important;
-}
-
-#reopen-btn {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: none; /* Hidden by default */
-    background: rgba(255, 45, 117, 0.2);
-    border: 1px solid var(--heart-pink);
-    color: var(--heart-pink);
-    padding: 8px 15px;
-    font-family: 'Courier New', monospace;
-    cursor: pointer;
-    z-index: 10002;
-    transition: 0.3s;
-}
-
-#reopen-btn:hover {
-    background: var(--heart-pink);
-    color: white;
-}
