@@ -124,32 +124,39 @@ function openEnvelope() {
 
 // MAKE SURE THIS FUNCTION NAME MATCHES YOUR HTML onclick="closeEnvelope(event)"
 function closeEnvelope(event) {
-    // 1. This stops the "open" function from firing immediately after clicking close
-    event.stopPropagation(); 
-
-    const wrapper = document.querySelector('.envelope-wrapper');
-    wrapper.classList.remove('open');
+    if (event) event.stopPropagation();
     
-    // 2. Hide the alert if it's open
-    const notif = document.getElementById('system-notification');
-    if (notif) {
-        notif.classList.remove('show');
-    }
+    const wrapper = document.querySelector('.envelope-wrapper');
+    wrapper.classList.remove('open'); // Slide the letter back down
+    
+    setTimeout(() => {
+        wrapper.style.display = 'none'; // Hide the whole thing
+        document.getElementById('reopen-btn').style.display = 'block'; // Show the key
+    }, 600); // Match this time to your CSS transition speed
 }
 
 function reopenEnvelope() {
-    // 1. Hide the reopen button
-    document.getElementById('reopen-btn').style.display = 'none';
+    // 1. Hide the button immediately
+    const btn = document.getElementById('reopen-btn');
+    if (btn) btn.style.display = 'none';
     
-    // 2. Show and Open the envelope again
-    const envelope = document.querySelector('.envelope-wrapper');
-    envelope.style.display = 'block';
-    
-    setTimeout(() => {
-        envelope.classList.add('open');
-    }, 100);
-}
+    // 2. Target the wrapper and the envelope itself
+    const wrapper = document.querySelector('.envelope-wrapper');
+    const envelope = document.querySelector('.envelope');
 
+    if (wrapper) {
+        // Force display back to block
+        wrapper.style.display = 'block';
+        wrapper.style.opacity = '1';
+        
+        // 3. Small delay to allow the browser to register the display change
+        setTimeout(() => {
+            wrapper.classList.add('open');
+            // If your CSS uses the .open class on the wrapper to move the letter:
+            console.log("Re-accessing file... Decrypting heart.");
+        }, 100);
+    }
+}
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
     const sound = document.getElementById('notif-sound');
