@@ -307,3 +307,10 @@ function completeSync() {
         }, 500);
     }, 200);
 }
+function showSystemAlert() {
+    const notif = document.getElementById('system-notification');
+    if (notif) {
+        notif.classList.add('show');
+        console.log("Notification Triggered!"); // Helpful for debugging
+    }
+}
