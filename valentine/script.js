@@ -137,6 +137,19 @@ function closeEnvelope(event) {
     }
 }
 
+function reopenEnvelope() {
+    // 1. Hide the reopen button
+    document.getElementById('reopen-btn').style.display = 'none';
+    
+    // 2. Show and Open the envelope again
+    const envelope = document.querySelector('.envelope-wrapper');
+    envelope.style.display = 'block';
+    
+    setTimeout(() => {
+        envelope.classList.add('open');
+    }, 100);
+}
+
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
     const sound = document.getElementById('notif-sound');

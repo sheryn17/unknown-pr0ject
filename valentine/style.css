@@ -550,3 +550,24 @@ body {
     background: #ff2d75;
     color: white !important;
 }
+
+#reopen-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none; /* Hidden by default */
+    background: rgba(255, 45, 117, 0.2);
+    border: 1px solid var(--heart-pink);
+    color: var(--heart-pink);
+    padding: 8px 15px;
+    font-family: 'Courier New', monospace;
+    cursor: pointer;
+    z-index: 10002;
+    transition: 0.3s;
+}
+
+#reopen-btn:hover {
+    background: var(--heart-pink);
+    color: white;
+}
