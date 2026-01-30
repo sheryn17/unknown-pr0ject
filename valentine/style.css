@@ -378,15 +378,23 @@ body::before {
     from { width: 100%; }
     to { width: 0%; }
 }
-.decrypt {
-    font-family: 'Courier New', Courier, monospace;
-    min-height: 1.2em;
-    color: #333;
-    /* Optional: subtle glow during decryption */
-    text-shadow: 0 0 0px transparent;
-    transition: text-shadow 0.3s ease;
+
+.letter-text h2 {
+    color: #ff2d75;
+    font-family: 'Courier New', monospace;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 45, 117, 0.2);
+    display: inline-block;
 }
 
-.envelope-wrapper.open .decrypt {
-    text-shadow: 0 0 5px rgba(255, 45, 117, 0.3);
+.letter-text p {
+    color: #333;
+    font-family: 'Courier New', monospace;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+/* Ensure the body can handle the filter transition */
+body {
+    transition: filter 0.3s ease;
 }

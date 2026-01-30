@@ -98,53 +98,38 @@ function celebrate() {
     initConstellation(); 
 }
 
-function decryptText(element) {
-    const originalText = element.getAttribute('data-text');
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+0123456789';
-    let iteration = 0;
-    
-    const interval = setInterval(() => {
-        element.innerText = originalText
-            .split("")
-            .map((letter, index) => {
-                if (index < iteration) {
-                    return originalText[index]; // Lock in the correct character
-                }
-                return characters[Math.floor(Math.random() * characters.length)];
-            })
-            .join("");
-
-        if (iteration >= originalText.length) {
-            clearInterval(interval);
-        }
-
-        iteration += 1 / 3; // Speed of decryption
-    }, 30);
-}
-
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
     
-    // Prevent re-opening if already open
     if (wrapper.classList.contains('open')) return;
     
+    // --- START GLITCH EFFECT ---
+    // This briefly inverts the colors and shifts the hue for a "system hack" feel
+    document.body.style.transition = "none"; 
+    document.body.style.filter = "invert(1) hue-rotate(180deg) contrast(1.5)";
+    
+    setTimeout(() => {
+        document.body.style.transition = "filter 0.3s ease";
+        document.body.style.filter = "none"; // Return to normal
+    }, 150); // The glitch lasts 150ms
+    // --- END GLITCH EFFECT ---
+
     wrapper.classList.add('open');
     
-    // 1. Show the System Alert (from our previous step)
+    // Show the System Alert notification
     if (typeof showSystemAlert === "function") {
-        setTimeout(showSystemAlert, 1000);
+        setTimeout(showSystemAlert, 600);
     }
+}
 
-    // 2. Start Decryption when the letter is visible
-    setTimeout(() => {
-        const elements = document.querySelectorAll('.decrypt');
-        elements.forEach((el, index) => {
-            // Stagger the start of each line for a cool effect
-            setTimeout(() => {
-                decryptText(el);
-            }, index * 500); 
-        });
-    }, 800); // Wait for letter slide-up animation
+function closeEnvelope(event) {
+    event.stopPropagation();
+    const wrapper = document.querySelector('.envelope-wrapper');
+    wrapper.classList.remove('open');
+    
+    if (typeof closeNotif === "function") {
+        closeNotif();
+    }
 }
 
 function showSystemAlert() {
