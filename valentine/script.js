@@ -261,8 +261,12 @@ function moveNo() {
 
 // 2. Start Sync after clicking YES
 function startSync() {
+    // Hide the question
     document.getElementById('valentine-question').style.display = 'none';
-    document.getElementById('unlock-gate').style.display = 'flex';
+    
+    // Show the gate with FLEX layout to stack heart and text
+    const gate = document.getElementById('unlock-gate');
+    gate.style.display = 'flex'; 
 }
 
 // 3. The Tapping Logic
