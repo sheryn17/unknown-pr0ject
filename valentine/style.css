@@ -339,27 +339,65 @@ body::before {
 #system-notification {
     position: fixed;
     top: 20px;
-    right: -350px; /* Hidden off-screen */
-    width: 300px;
-    background: rgba(10, 1, 6, 0.98);
-    border: 1px solid var(--heart-pink);
-    border-radius: 8px;
+    right: -350px; /* JS will change this to 20px */
+    width: 320px;
+    min-height: 120px; /* Ensures it doesn't look squashed */
+    background: rgba(10, 1, 6, 0.95);
+    border: 1px solid #ff2d75;
+    border-radius: 12px;
     color: white;
-    z-index: 99999; 
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Clips the progress bar to the border radius */
+    box-shadow: 0 0 20px rgba(255, 45, 117, 0.4);
     transition: right 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
-#system-notification.show {
-    right: 20px; /* Slide into view */
+.notif-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 45, 117, 0.15);
+    border-bottom: 1px solid rgba(255, 45, 117, 0.3);
 }
 
-.notif-progress.active {
-    height: 3px;
-    background: var(--heart-pink);
+.notif-title {
+    flex-grow: 1;
+    font-size: 0.8rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #ff2d75;
+}
+
+.notif-body {
+    padding: 20px 15px; /* Adds space around the message */
+    font-size: 0.95rem;
+    line-height: 1.4;
+    text-align: left;
+}
+
+.notif-body strong {
+    color: #ff2d75;
+    text-shadow: 0 0 5px #ff2d75;
+}
+
+.notif-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    line-height: 1;
+}
+
+/* The timer bar at the bottom */
+.notif-progress {
+    height: 4px;
     width: 100%;
-    animation: notifTimer 5s linear forwards;
+    background: #ff2d75;
+    margin-top: auto; /* Pushes it to the very bottom */
 }
-
 @keyframes notifTimer {
     from { width: 100%; }
     to { width: 0%; }

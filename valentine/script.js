@@ -309,13 +309,13 @@ function completeSync() {
 
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
-    const bar = document.querySelector('.notif-progress');
-    
+    // Slide it in
     notif.classList.add('show');
-    bar.classList.add('active');
-
-    // Auto-hide after 5 seconds
-    setTimeout(closeNotif, 10000);
+    
+    // Optional: Auto-close after 6 seconds
+    setTimeout(() => {
+        closeNotif();
+    }, 6000);
 }
 
 function closeNotif() {
