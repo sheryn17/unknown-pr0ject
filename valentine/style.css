@@ -324,53 +324,39 @@ body::before {
     transition: width 0.1s linear;
 }
 
+/* Glass Box for Readability */
+.glass-box {
+    background: rgba(10, 1, 6, 0.9);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid var(--heart-pink);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(255, 45, 117, 0.3);
+    text-align: center;
+}
+
+/* Notification Slide Styling */
 #system-notification {
     position: fixed;
     top: 20px;
-    right: -350px;
+    right: -350px; /* Hidden off-screen */
     width: 300px;
-    background: rgba(26, 5, 16, 0.95);
+    background: rgba(10, 1, 6, 0.98);
     border: 1px solid var(--heart-pink);
     border-radius: 8px;
     color: white;
-    font-family: 'Courier New', Courier, monospace;
-    z-index: 2000;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: right 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 99999; 
+    transition: right 0.6s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 #system-notification.show {
-    right: 20px; /* Slides into view */
+    right: 20px; /* Slide into view */
 }
 
-.notif-header {
-    background: rgba(255, 45, 117, 0.2);
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    font-size: 0.7rem;
-    font-weight: bold;
-    border-bottom: 1px solid rgba(255, 45, 117, 0.3);
-}
-
-.notif-icon { margin-right: 8px; }
-.notif-title { flex-grow: 1; color: var(--heart-pink); }
-.notif-close { background: none; border: none; color: white; cursor: pointer; font-size: 1rem; }
-
-.notif-body {
-    padding: 15px;
-    font-size: 0.85rem;
-    line-height: 1.4;
-}
-
-.notif-progress {
+.notif-progress.active {
     height: 3px;
     background: var(--heart-pink);
-    width: 0%;
-}
-
-/* Animation for the progress bar */
-.notif-progress.active {
+    width: 100%;
     animation: notifTimer 5s linear forwards;
 }
 

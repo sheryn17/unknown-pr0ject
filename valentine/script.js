@@ -288,29 +288,36 @@ function chargeHeart() {
 }
 
 function completeSync() {
-    // Brief Glitch Effect
-    document.body.style.filter = "invert(1)";
+    // Hide the tap screen
+    document.getElementById('unlock-gate').style.display = 'none';
+    
+    // Show and Open Envelope
+    const envelope = document.getElementById('main-envelope');
+    envelope.style.display = 'block';
     
     setTimeout(() => {
-        document.body.style.filter = "none";
-        document.getElementById('unlock-gate').style.display = 'none';
+        envelope.classList.add('open');
         
-        const envelopeWrap = document.querySelector('.envelope-wrapper');
-        envelopeWrap.style.display = 'block';
+        // --- TRIGGER THE NOTIFICATION ---
+        showSystemAlert();
         
-        // Final opening animation
-        setTimeout(() => {
-            envelopeWrap.classList.add('open');
-            // Play notification sound
-            const sound = document.getElementById('notif-sound');
-            if(sound) sound.play();
-        }, 500);
-    }, 200);
+        // Play notification sound
+        const sound = document.getElementById('notif-sound');
+        if(sound) sound.play().catch(() => {});
+    }, 500);
 }
+
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
-    if (notif) {
-        notif.classList.add('show');
-        console.log("Notification Triggered!"); // Helpful for debugging
-    }
+    const bar = document.querySelector('.notif-progress');
+    
+    notif.classList.add('show');
+    bar.classList.add('active');
+
+    // Auto-hide after 5 seconds
+    setTimeout(closeNotif, 10000);
+}
+
+function closeNotif() {
+    document.getElementById('system-notification').classList.remove('show');
 }
