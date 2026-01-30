@@ -378,3 +378,15 @@ body::before {
     from { width: 100%; }
     to { width: 0%; }
 }
+.decrypt {
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 1.2em;
+    color: #333;
+    /* Optional: subtle glow during decryption */
+    text-shadow: 0 0 0px transparent;
+    transition: text-shadow 0.3s ease;
+}
+
+.envelope-wrapper.open .decrypt {
+    text-shadow: 0 0 5px rgba(255, 45, 117, 0.3);
+}
