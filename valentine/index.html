@@ -43,15 +43,33 @@
     </div>
 
 <div id="photo-gallery" class="hidden">
-    <div class="envelope-wrapper" onclick="openEnvelope()">
+    
+    <div id="valentine-question">
+        <h2 class="terminal-text">> CRITICAL_QUERY: WILL_YOU_BE_MY_VALENTINE?</h2>
+        <div class="choice-buttons">
+            <button class="hack-btn" onclick="startSync()">[ YES ]</button>
+            <button class="hack-btn" id="no-btn" onmouseover="moveNo()">[ NO ]</button>
+        </div>
+    </div>
+
+    <div id="unlock-gate" style="display: none;">
+        <div class="heart-container" onclick="chargeHeart()">
+            <div class="heart-outline"></div>
+            <div class="heart-fill"></div>
+            <div class="tap-text">TAP TO SYNC HEARTS</div>
+        </div>
+        <div class="sync-status">UPLOADING_YES: <span id="sync-val">0</span>%</div>
+    </div>
+
+    <div class="envelope-wrapper" style="display: none;">
         <div class="envelope">
             <div class="back"></div>
             <div class="letter">
                 <div class="letter-content">
                     <div class="letter-text">
                         <h2>LOVE_STABLE</h2>
-                        <p>Happy Valentines day, love ko! I am beyond happy to celebrate every special day with you.</p>
-                        <p>Always remember that I love you more than words can code, okay?.</p>
+                        <p>Happy Valentines day, love ko!</p>
+                        <p>You've successfully bypassed my firewalls and synced with my heart.</p>
                         <button class="close-btn" onclick="closeEnvelope(event)">[ CLOSE_FILE ]</button>
                     </div>
                 </div>

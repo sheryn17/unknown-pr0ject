@@ -246,3 +246,64 @@ function createBackgroundParticle() {
 // Start the mix
 setInterval(createBackgroundParticle, 1000);
 
+let heartCharge = 0;
+const chargeNeeded = 10; // Number of taps required
+
+// 1. Move the No Button
+function moveNo() {
+    const btn = document.getElementById('no-btn');
+    const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - btn.offsetHeight);
+    btn.style.position = 'fixed';
+    btn.style.left = x + 'px';
+    btn.style.top = y + 'px';
+}
+
+// 2. Start Sync after clicking YES
+function startSync() {
+    document.getElementById('valentine-question').style.display = 'none';
+    document.getElementById('unlock-gate').style.display = 'flex';
+}
+
+// 3. The Tapping Logic
+function chargeHeart() {
+    heartCharge++;
+    const fill = document.querySelector('.heart-fill');
+    const syncVal = document.getElementById('sync-val');
+    const container = document.querySelector('.heart-container');
+    
+    // Update fill and text
+    let progress = heartCharge / chargeNeeded;
+    fill.style.transform = `scale(${progress})`;
+    syncVal.innerText = Math.floor(progress * 100);
+
+    // Physical feedback (Pulse on tap)
+    container.style.transform = 'scale(1.2)';
+    setTimeout(() => container.style.transform = 'scale(1)', 100);
+
+    // 4. Reveal Envelope when 100%
+    if (heartCharge >= chargeNeeded) {
+        completeSync();
+    }
+}
+
+function completeSync() {
+    // Brief Glitch Effect
+    document.body.style.filter = "invert(1)";
+    
+    setTimeout(() => {
+        document.body.style.filter = "none";
+        document.getElementById('unlock-gate').style.display = 'none';
+        
+        const envelopeWrap = document.querySelector('.envelope-wrapper');
+        envelopeWrap.style.display = 'block';
+        
+        // Final opening animation
+        setTimeout(() => {
+            envelopeWrap.classList.add('open');
+            // Play notification sound
+            const sound = document.getElementById('notif-sound');
+            if(sound) sound.play();
+        }, 500);
+    }, 200);
+}
