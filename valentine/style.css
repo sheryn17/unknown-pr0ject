@@ -527,3 +527,26 @@ body {
     text-shadow: 0 0 10px #ff2d75;
 
 }
+
+#valentine-question.content-box {
+    background: rgba(10, 1, 6, 0.9); /* Deep dark background */
+    backdrop-filter: blur(8px);      /* Blurs photos/binary behind it */
+    padding: 40px;
+    border: 2px solid #ff2d75;       /* Glowing border */
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 0 30px rgba(255, 45, 117, 0.4);
+    z-index: 100;
+}
+
+.terminal-text {
+    color: #ff2d75 !important;      /* Bright neon pink */
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px rgba(255, 45, 117, 0.7);
+    line-height: 1.4;
+    margin-bottom: 30px;
+    font-family: 'Courier New', monospace;
+}
