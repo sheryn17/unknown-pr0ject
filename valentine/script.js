@@ -124,15 +124,18 @@ function openEnvelope() {
 
 // MAKE SURE THIS FUNCTION NAME MATCHES YOUR HTML onclick="closeEnvelope(event)"
 function closeEnvelope(event) {
-    if (event) event.stopPropagation(); 
-    document.querySelector('.envelope-wrapper').classList.remove('open');
+    // 1. This stops the "open" function from firing immediately after clicking close
+    event.stopPropagation(); 
+
+    const wrapper = document.querySelector('.envelope-wrapper');
+    wrapper.classList.remove('open');
+    
+    // 2. Hide the alert if it's open
+    const notif = document.getElementById('system-notification');
+    if (notif) {
+        notif.classList.remove('show');
+    }
 }
-
-// Re-open by clicking the envelope itself
-document.querySelector('.envelope-wrapper').addEventListener('click', function() {
-    this.classList.add('open');
-});
-
 
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
@@ -244,40 +247,49 @@ function createBackgroundParticle() {
 setInterval(createBackgroundParticle, 1000);
 
 let heartCharge = 0;
-const chargeNeeded = 10;
+const chargeNeeded = 10; // Number of taps required
 
-// 1. Move the NO button
+// 1. Move the No Button
 function moveNo() {
     const btn = document.getElementById('no-btn');
+    const x = Math.random() * (window.innerWidth - btn.offsetWidth);
+    const y = Math.random() * (window.innerHeight - btn.offsetHeight);
     btn.style.position = 'fixed';
-    btn.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-    btn.style.top = Math.random() * (window.innerHeight - 50) + 'px';
+    btn.style.left = x + 'px';
+    btn.style.top = y + 'px';
 }
 
-// 2. Start Sync after YES
+// 2. Start Sync after clicking YES
 function startSync() {
     document.getElementById('valentine-question').style.display = 'none';
-    const gate = document.getElementById('unlock-gate');
-    gate.style.display = 'flex'; // This activates the vertical stacking
+    document.getElementById('unlock-gate').style.display = 'flex';
 }
-// 3. Tapping Heart
+
+// 3. The Tapping Logic
 function chargeHeart() {
     heartCharge++;
     const fill = document.querySelector('.heart-fill');
     const syncVal = document.getElementById('sync-val');
+    const container = document.querySelector('.heart-container');
     
+    // Update fill and text
     let progress = heartCharge / chargeNeeded;
     fill.style.transform = `scale(${progress})`;
     syncVal.innerText = Math.floor(progress * 100);
 
+    // Physical feedback (Pulse on tap)
+    container.style.transform = 'scale(1.2)';
+    setTimeout(() => container.style.transform = 'scale(1)', 100);
+
+    // 4. Reveal Envelope when 100%
     if (heartCharge >= chargeNeeded) {
         completeSync();
     }
 }
 
-// 4. Reveal Letter and Notification
 function completeSync() {
-    document.body.style.filter = "invert(1)"; // Brief glitch
+    // Brief Glitch Effect
+    document.body.style.filter = "invert(1)";
     
     setTimeout(() => {
         document.body.style.filter = "none";
@@ -286,23 +298,12 @@ function completeSync() {
         const envelopeWrap = document.querySelector('.envelope-wrapper');
         envelopeWrap.style.display = 'block';
         
+        // Final opening animation
         setTimeout(() => {
             envelopeWrap.classList.add('open');
-            
-            // --- TRIGGER THE SLIDE NOTIFICATION ---
-            showSystemAlert();
-            
-            document.getElementById('notif-sound').play().catch(()=>{});
+            // Play notification sound
+            const sound = document.getElementById('notif-sound');
+            if(sound) sound.play();
         }, 500);
     }, 200);
-}
-
-function showSystemAlert() {
-    const notif = document.getElementById('system-notification');
-    notif.classList.add('show');
-    setTimeout(closeNotif, 5000);
-}
-
-function closeNotif() {
-    document.getElementById('system-notification').classList.remove('show');
 }
