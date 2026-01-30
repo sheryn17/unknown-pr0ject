@@ -451,12 +451,30 @@ body {
     100% { transform: translateY(110vh) rotate(360deg); }
 }
 
+/* --- IMPROVED READABILITY CONTAINERS --- */
+.glass-box {
+    background: rgba(10, 1, 6, 0.9); /* Dark background to block photos */
+    padding: 25px 40px;
+    border-radius: 15px;
+    border: 1px solid var(--heart-pink);
+    backdrop-filter: blur(10px); /* Blurs photos behind the text */
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 45, 117, 0.3);
+    margin-top: 30px; /* Space below the heart */
+}
+
+/* --- REFINED TAP SYNC GATE --- */
 #unlock-gate {
-    display: none; /* Controlled by JS */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* JS will change this to 'flex' */
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    z-index: 10000;
+    width: 100%;
 }
 
 .heart-container {
@@ -465,33 +483,32 @@ body {
     height: 110px;
     cursor: pointer;
     transition: transform 0.1s;
+    filter: drop-shadow(0 0 10px var(--heart-pink));
 }
 
-.heart-outline, .heart-fill {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: #ff2d75;
-    clip-path: path('M60 106.7L12.8 59.2C4.9 51.2 0 40.4 0 29.2 0 13.1 13.1 0 29.2 0c7.7 0 14.8 3 20 7.9L60 18.4l10.8-10.5C76 3 83.1 0 90.8 0 106.9 0 120 13.1 120 29.2c0 11.2-4.9 22-12.8 30L60 106.7z');
-}
-
-.heart-outline {
-    background-color: transparent;
-    border: 2px solid #ff2d75;
-    opacity: 0.2;
-}
-
-.heart-fill {
-    transform: scale(0); /* Starts empty */
-    transform-origin: bottom;
-    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* --- TEXT STYLING FOR MAXIMUM CLARITY --- */
+.tap-instruction {
+    color: #ffffff !important;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    display: block;
+    text-transform: uppercase;
 }
 
 .sync-status {
-    margin-top: 20px;
-    color: #ff2d75;
-    font-family: monospace;
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px #ff2d75;
+    margin-top: 0; /* Reset margin as it's now inside the glass-box */
+    color: var(--neon-green) !important; /* Green for "Status" is very readable */
+    font-family: 'Courier New', monospace;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-shadow: 0 0 15px var(--neon-green);
+}
+
+/* --- ENVELOPE READABILITY FIX --- */
+.letter-text p {
+    color: #222 !important; /* Ensure the letter content is dark on white paper */
+    font-weight: normal;
+    text-shadow: none;
 }
 

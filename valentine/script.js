@@ -124,18 +124,15 @@ function openEnvelope() {
 
 // MAKE SURE THIS FUNCTION NAME MATCHES YOUR HTML onclick="closeEnvelope(event)"
 function closeEnvelope(event) {
-    // 1. This stops the "open" function from firing immediately after clicking close
-    event.stopPropagation(); 
-
-    const wrapper = document.querySelector('.envelope-wrapper');
-    wrapper.classList.remove('open');
-    
-    // 2. Hide the alert if it's open
-    const notif = document.getElementById('system-notification');
-    if (notif) {
-        notif.classList.remove('show');
-    }
+    if (event) event.stopPropagation(); 
+    document.querySelector('.envelope-wrapper').classList.remove('open');
 }
+
+// Re-open by clicking the envelope itself
+document.querySelector('.envelope-wrapper').addEventListener('click', function() {
+    this.classList.add('open');
+});
+
 
 function showSystemAlert() {
     const notif = document.getElementById('system-notification');
@@ -259,14 +256,10 @@ function moveNo() {
 
 // 2. Start Sync after YES
 function startSync() {
-    // Hide the question
     document.getElementById('valentine-question').style.display = 'none';
-    
-    // Show the gate with FLEX layout to stack heart and text
     const gate = document.getElementById('unlock-gate');
-    gate.style.display = 'flex'; 
+    gate.style.display = 'flex'; // This activates the vertical stacking
 }
-
 // 3. Tapping Heart
 function chargeHeart() {
     heartCharge++;
