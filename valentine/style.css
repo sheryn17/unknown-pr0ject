@@ -416,3 +416,37 @@ body {
 .envelope-wrapper.open .letter {
     z-index: 15;
 }
+
+/* The Polaroid Style */
+.floating-polaroid {
+    position: fixed;
+    top: -100px;
+    z-index: -1;
+    padding: 4px 4px 12px 4px; /* Tiny polaroid frame */
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0.3; /* Keep it subtle */
+    pointer-events: none;
+    animation: fall linear forwards;
+    filter: sepia(0.2) hue-rotate(320deg); /* Pinkish tint */
+}
+
+.floating-polaroid img {
+    width: 100%;
+    display: block;
+}
+
+/* The Heart Style */
+.floating-heart {
+    position: fixed;
+    top: -50px;
+    z-index: -1;
+    opacity: 0.4;
+    pointer-events: none;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}

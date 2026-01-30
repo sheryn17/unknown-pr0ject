@@ -98,6 +98,10 @@ function celebrate() {
     initConstellation(); 
 }
 
+function startTheMemories() {
+    // Only start the photo interval when the hacker sequence starts
+    setInterval(createPhotoParticle, 2000);
+}
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
     
@@ -191,3 +195,50 @@ function initConstellation() {
 }
 
 window.onload = startSequence;
+
+const yourPhotos = [
+    'https://i.ibb.co/wNFQ51JP/Image.jpg', 
+    'https://i.ibb.co/PG2Y21Qy/Image-2.jpg', 
+    'https://i.ibb.co/mCbN110F/Image-1.jpg'
+];
+
+function createBackgroundParticle() {
+    const container = document.body;
+    const isPhoto = Math.random() > 0.7; // 30% chance for a photo, 70% for a heart
+    
+    const particle = document.createElement(isPhoto ? 'div' : 'span');
+    
+    if (isPhoto) {
+        // Create the Polaroid Photo
+        particle.classList.add('floating-polaroid');
+        const img = document.createElement('img');
+        img.src = yourPhotos[Math.floor(Math.random() * yourPhotos.length)];
+        particle.appendChild(img);
+        
+        // Random small size for photos
+        const size = Math.random() * (70 - 40) + 40; // Small: 40px to 70px
+        particle.style.width = `${size}px`;
+    } else {
+        // Create the Floating Heart
+        particle.classList.add('floating-heart');
+        particle.innerText = '❤️';
+        particle.style.fontSize = `${Math.random() * (20 - 10) + 10}px`;
+    }
+    
+    // Common positioning logic
+    const startX = Math.random() * window.innerWidth;
+    const duration = Math.random() * (15 - 8) + 8; // Slower, subtle movement
+    
+    particle.style.left = `${startX}px`;
+    particle.style.animationDuration = `${duration}s`;
+    particle.style.left = `${startX}px`;
+
+    container.appendChild(particle);
+
+    setTimeout(() => {
+        particle.remove();
+    }, duration * 1000);
+}
+
+// Start the mix
+setInterval(createBackgroundParticle, 1000);
