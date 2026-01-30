@@ -320,14 +320,14 @@ body::before {
 #progress-bar {
     width: 0%;
     height: 100%;
-    background: #333; /* Keep it gray/boring */
+    background: #333;
     transition: width 0.1s linear;
 }
 
 #system-notification {
     position: fixed;
     top: 20px;
-    right: -350px; /* Hidden off-screen initially */
+    right: -350px;
     width: 300px;
     background: rgba(26, 5, 16, 0.95);
     border: 1px solid var(--heart-pink);

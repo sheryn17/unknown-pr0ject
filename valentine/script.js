@@ -199,7 +199,10 @@ window.onload = startSequence;
 const yourPhotos = [
     'https://i.ibb.co/wNFQ51JP/Image.jpg', 
     'https://i.ibb.co/PG2Y21Qy/Image-2.jpg', 
-    'https://i.ibb.co/mCbN110F/Image-1.jpg'
+    'https://i.ibb.co/mCbN110F/Image-1.jpg',
+    'https://i.ibb.co/WvyVH0PF/Image.jpg',
+    'https://i.ibb.co/7NgHPp6r/Image-1.jpg',
+    'https://i.ibb.co/8DWfgLJ8/Image-2.jpg'
 ];
 
 function createBackgroundParticle() {
