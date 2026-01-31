@@ -330,3 +330,28 @@ function showSystemAlert() {
 function closeNotif() {
     document.getElementById('system-notification').classList.remove('show');
 }
+
+function revealGift(num, event) {
+    if (event) event.stopPropagation(); // Prevents conflict with envelope clicks
+    
+    const display = document.getElementById('gift-display');
+    let message = "";
+
+    switch(num) {
+        case 1:
+            message = "🎁 ACCESS_GRANTED: A Movie Date of your choice";
+            break;
+        case 2:
+            message = "🎁 ACCESS_GRANTED: Unlimited kiss and hug hehe";
+            break;
+        case 3:
+            message = "🎁 ACCESS_GRANTED: Your favorite food delivery right now";
+            break;
+    }
+
+    display.style.opacity = 0;
+    setTimeout(() => {
+        display.innerText = message;
+        display.style.opacity = 1;
+    }, 200);
+}

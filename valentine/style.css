@@ -583,3 +583,30 @@ body {
     border: 1px solid #ff2d75;
     backdrop-filter: blur(5px); /* Blurs the background photos slightly */
 }
+
+.gift-grid {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.gift-item {
+    border: 1px solid #ff2d75;
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: rgba(255, 45, 117, 0.05);
+}
+
+.gift-item:hover {
+    background: #ff2d75;
+    color: white;
+    transform: scale(1.1);
+}
+
+#gift-display {
+    transition: opacity 0.3s ease;
+    line-height: 1.2;
+}
