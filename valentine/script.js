@@ -345,7 +345,7 @@ function revealGift(num, event) {
             message = "🎁 ACCESS_GRANTED: Unlimited kiss and hug hehe";
             break;
         case 3:
-            message = "🎁 ACCESS_GRANTED: Your favorite food delivery right now";
+            message = "🎁 ACCESS_GRANTED: I'll buy you your favorite food/drink today!";
             break;
     }
 
