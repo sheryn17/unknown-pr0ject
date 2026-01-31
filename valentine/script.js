@@ -102,10 +102,20 @@ function startTheMemories() {
     // Only start the photo interval when the hacker sequence starts
     setInterval(createPhotoParticle, 2000);
 }
+// Add this at the bottom of your script.js
+document.addEventListener('DOMContentLoaded', () => {
+    const wrapper = document.querySelector('.envelope-wrapper');
+    
+    // This allows her to tap the envelope to reopen it
+    wrapper.addEventListener('click', () => {
+        openEnvelope();
+    });
+});
+
 function openEnvelope() {
     const wrapper = document.querySelector('.envelope-wrapper');
     
-    // Prevent opening if it's already open
+    // Prevent re-triggering the glitch if it's already open
     if (wrapper.classList.contains('open')) return;
     
     // The Glitch Effect
@@ -122,15 +132,14 @@ function openEnvelope() {
     }
 }
 
-// MAKE SURE THIS FUNCTION NAME MATCHES YOUR HTML onclick="closeEnvelope(event)"
 function closeEnvelope(event) {
-    // 1. This stops the "open" function from firing immediately after clicking close
+    // Stops the 'openEnvelope' click from firing immediately
     event.stopPropagation(); 
 
     const wrapper = document.querySelector('.envelope-wrapper');
     wrapper.classList.remove('open');
     
-    // 2. Hide the alert if it's open
+    // Hide the alert if it's open
     const notif = document.getElementById('system-notification');
     if (notif) {
         notif.classList.remove('show');

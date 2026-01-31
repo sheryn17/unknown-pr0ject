@@ -100,9 +100,7 @@ button:hover { background: var(--heart-pink); color: white; transform: scale(1.0
     transform: translate(-50%, -50%);
     cursor: pointer;
     z-index: 500;
-    /* This triggers the pop zoom when the envelope first appears */
-    animation: popZoom 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    transition: transform 0.3s ease; /* Smooth transition for hover */
+    transition: transform 0.3s ease;
 }
 
 /* --- HOVER "POP" EFFECT --- */
@@ -415,10 +413,11 @@ body::before {
 }
 
 .letter-text p {
-    color: #333;
+    color: #000000 !important; /* Pure black text on white paper */
     font-family: 'Courier New', monospace;
-    line-height: 1.5;
+    line-height: 1.4;
     margin-bottom: 10px;
+    font-size: 0.9rem;
 }
 
 /* Ensure the body can handle the filter transition */
@@ -427,16 +426,15 @@ body {
 }
 .close-btn {
     position: relative;
-    z-index: 20; /* High z-index ensures it sits above all envelope layers */
+    z-index: 20; 
     display: block;
-    margin: 20px auto 10px;
-    background: transparent;
-    border: 1px solid #ff2d75;
-    color: #ff2d75;
-    font-family: 'Courier New', monospace;
-    padding: 8px 20px;
+    margin: 10px auto;
+    background: white;
+    border: 1px solid var(--heart-pink);
+    color: var(--heart-pink);
+    padding: 5px 15px;
     cursor: pointer;
-    pointer-events: auto; /* Forces the button to be clickable */
+    pointer-events: auto; /* Vital for clicking */
 }
 
 /* Ensure the letter is on top of the envelope front when open */
