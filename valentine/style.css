@@ -550,3 +550,38 @@ body {
     margin-bottom: 30px;
     font-family: 'Courier New', monospace;
 }
+
+/* --- FIXING THE READABILITY --- */
+
+/* 1. Make the Valentine Question bright pink */
+.terminal-text {
+    color: #ff2d75 !important; 
+    text-shadow: 0 0 10px rgba(255, 45, 117, 0.8);
+    font-weight: bold;
+}
+
+/* 2. Make the 'TAP TO AUTHORIZE' white for better contrast */
+.tap-text {
+    color: #ffffff !important;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+    margin-bottom: 15px;
+}
+
+/* 3. Ensure the System Alert text is white, not gray/black */
+.notif-body {
+    color: #ffffff !important;
+    padding: 10px;
+}
+
+/* 4. The Glass Box (Optional but Recommended) */
+/* Adding this class to your containers will create a dark 
+   semi-transparent background so photos don't mess with the text. */
+.content-box, .text-group {
+    background: rgba(10, 1, 6, 0.85); 
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #ff2d75;
+    backdrop-filter: blur(5px); /* Blurs the background photos slightly */
+}
