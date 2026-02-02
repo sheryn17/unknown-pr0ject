@@ -211,7 +211,10 @@ const yourPhotos = [
     'https://i.ibb.co/mCbN110F/Image-1.jpg',
     'https://i.ibb.co/WvyVH0PF/Image.jpg',
     'https://i.ibb.co/7NgHPp6r/Image-1.jpg',
-    'https://i.ibb.co/8DWfgLJ8/Image-2.jpg'
+    'https://i.ibb.co/8DWfgLJ8/Image-2.jpg',
+    'https://i.ibb.co/93bXBMnc/Image.jpg',
+    'https://i.ibb.co/F4R0sTFy/Image-jpg.jpg'
+
 ];
 
 function createBackgroundParticle() {
@@ -348,7 +351,7 @@ function revealGift(num, event) {
 
     switch(num) {
         case 1:
-            message = "🎁 ACCESS_GRANTED: A Movie Date of your choice";
+            message = "🎁 ACCESS_GRANTED: A Movie date of your choice";
             break;
         case 2:
             message = "🎁 ACCESS_GRANTED: Unlimited kiss and hug hehe";
