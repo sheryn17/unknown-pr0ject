@@ -355,3 +355,28 @@ function revealGift(num, event) {
         display.style.opacity = 1;
     }, 200);
 }
+
+// 1. Define the text you want to appear
+const valentineText = "> CRITICAL_QUERY: \nWILL YOU BE MY VALENTINE, BABY?";
+let charIndex = 0;
+
+function typeValentine() {
+    const element = document.getElementById("typewriter-valentine");
+    const buttons = document.getElementById("buttons-container");
+
+    if (charIndex < valentineText.length) {
+        // Handle line breaks (\n) correctly
+        if (valentineText.charAt(charIndex) === "\n") {
+            element.innerHTML += "<br>";
+        } else {
+            element.innerHTML += valentineText.charAt(charIndex);
+        }
+        
+        charIndex++;
+        setTimeout(typeValentine, 70); // Control typing speed (lower = faster)
+    } else {
+        // 2. Once typing is finished, fade the buttons in smoothly
+        buttons.style.transition = "opacity 1s ease";
+        buttons.style.opacity = "1";
+    }
+}

@@ -610,3 +610,17 @@ body {
     transition: opacity 0.3s ease;
     line-height: 1.2;
 }
+
+.romantic-bloom {
+    opacity: 0;
+    transform: scale(0.9);
+    /* cubic-bezier makes the "bloom" feel very smooth and organic */
+    animation: bloomEffect 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes bloomEffect {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
