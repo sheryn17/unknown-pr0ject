@@ -365,33 +365,35 @@ function revealGift(num, event) {
     }, 200);
 }
 
-// 1. Define the text you want to appear
+// 1. Setup the variables
 const valentineText = "> CRITICAL_QUERY: \nWILL YOU BE MY VALENTINE, BABY?";
 let charIndex = 0;
 
 function typeValentine() {
     const element = document.getElementById("typewriter-valentine");
     const buttons = document.getElementById("buttons-container");
-    
-    // Create the typing effect
+
+    if (!element) return; // Safety check
+
     if (charIndex < valentineText.length) {
-        // Remove cursor temporarily to add letter
-        element.innerHTML = element.innerHTML.replace('<span class="cursor">|</span>', '');
-        
+        // Handle the new line character (\n)
         if (valentineText.charAt(charIndex) === "\n") {
             element.innerHTML += "<br>";
         } else {
             element.innerHTML += valentineText.charAt(charIndex);
         }
         
-        // Add cursor back
-        element.innerHTML += '<span class="cursor">|</span>';
-        
         charIndex++;
-        setTimeout(typeValentine, 80); 
+        setTimeout(typeValentine, 80); // Speed of typing
     } else {
-        // Once finished, fade in the buttons
-        buttons.style.transition = "opacity 1s ease";
-        buttons.style.opacity = "1";
+        // 2. Reveal buttons when typing finishes
+        if (buttons) buttons.style.opacity = "1";
     }
 }
+
+// 3. THE FIX: This "Trigger" tells the code to start immediately
+document.addEventListener('DOMContentLoaded', () => {
+    // If the box is hidden at start, don't call this yet. 
+    // If it's the first thing she sees, call it now:
+    setTimeout(typeValentine, 1000); 
+});

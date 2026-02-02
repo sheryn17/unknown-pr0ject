@@ -614,7 +614,7 @@ body {
 .romantic-bloom {
     opacity: 0;
     transform: scale(0.9);
-    /* cubic-bezier makes the "bloom" feel very smooth and organic */
+    /* This makes the entrance smooth and elegant */
     animation: bloomEffect 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
@@ -624,13 +624,11 @@ body {
         transform: scale(1);
     }
 }
-.cursor {
-    font-weight: bold;
-    color: var(--heart-pink);
-    animation: blink 0.8s infinite;
-}
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+/* Ensure the text has a nice hacker glow */
+.terminal-text {
+    color: #ff2d75;
+    text-shadow: 0 0 10px rgba(255, 45, 117, 0.5);
+    line-height: 1.5;
+    min-height: 100px; /* Keeps the box from jumping */
 }
