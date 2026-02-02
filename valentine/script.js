@@ -294,6 +294,15 @@ function chargeHeart() {
     if (heartCharge >= chargeNeeded) {
         completeSync();
     }
+    // Example: inside your progress finish logic
+if (progress >= 100) {
+    clearInterval(syncInterval);
+    document.getElementById('sync-screen').style.display = 'none'; // Hide sync
+    document.getElementById('valentine-question').style.display = 'flex'; // Show question
+    
+    // THIS IS THE TRIGGER:
+    typeValentine(); 
+}
 }
 
 function completeSync() {
@@ -363,19 +372,25 @@ let charIndex = 0;
 function typeValentine() {
     const element = document.getElementById("typewriter-valentine");
     const buttons = document.getElementById("buttons-container");
-
+    
+    // Create the typing effect
     if (charIndex < valentineText.length) {
-        // Handle line breaks (\n) correctly
+        // Remove cursor temporarily to add letter
+        element.innerHTML = element.innerHTML.replace('<span class="cursor">|</span>', '');
+        
         if (valentineText.charAt(charIndex) === "\n") {
             element.innerHTML += "<br>";
         } else {
             element.innerHTML += valentineText.charAt(charIndex);
         }
         
+        // Add cursor back
+        element.innerHTML += '<span class="cursor">|</span>';
+        
         charIndex++;
-        setTimeout(typeValentine, 70); // Control typing speed (lower = faster)
+        setTimeout(typeValentine, 80); 
     } else {
-        // 2. Once typing is finished, fade the buttons in smoothly
+        // Once finished, fade in the buttons
         buttons.style.transition = "opacity 1s ease";
         buttons.style.opacity = "1";
     }
